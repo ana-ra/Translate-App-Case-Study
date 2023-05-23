@@ -11,6 +11,8 @@
 		3F820D182A1B9F20009A1E9E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F820D172A1B9F20009A1E9E /* ContentView.swift */; };
 		3F820D1A2A1B9F21009A1E9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F820D192A1B9F21009A1E9E /* Assets.xcassets */; };
 		3F820D1D2A1B9F21009A1E9E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F820D1C2A1B9F21009A1E9E /* Preview Assets.xcassets */; };
+		8925BE972A1CF11C00118B93 /* TranslationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8925BE962A1CF11C00118B93 /* TranslationAPI.swift */; };
+		8925BE992A1CF19D00118B93 /* TranslationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8925BE982A1CF19D00118B93 /* TranslationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		3F820D172A1B9F20009A1E9E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3F820D192A1B9F21009A1E9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F820D1C2A1B9F21009A1E9E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8925BE962A1CF11C00118B93 /* TranslationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationAPI.swift; sourceTree = "<group>"; };
+		8925BE982A1CF19D00118B93 /* TranslationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,8 @@
 		3F820D142A1B9F20009A1E9E /* translateStudy */ = {
 			isa = PBXGroup;
 			children = (
+				8925BE9A2A1D057D00118B93 /* TranslationAPI */,
+				8925BE952A1CEDC300118B93 /* View */,
 				3F820D152A1B9F20009A1E9E /* translateStudyApp.swift */,
 				3F820D172A1B9F20009A1E9E /* ContentView.swift */,
 				3F820D192A1B9F21009A1E9E /* Assets.xcassets */,
@@ -65,6 +71,22 @@
 				3F820D1C2A1B9F21009A1E9E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8925BE952A1CEDC300118B93 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8925BE9A2A1D057D00118B93 /* TranslationAPI */ = {
+			isa = PBXGroup;
+			children = (
+				8925BE982A1CF19D00118B93 /* TranslationManager.swift */,
+				8925BE962A1CF11C00118B93 /* TranslationAPI.swift */,
+			);
+			path = TranslationAPI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +105,8 @@
 			dependencies = (
 			);
 			name = translateStudy;
+			packageProductDependencies = (
+			);
 			productName = translateStudy;
 			productReference = 3F820D122A1B9F20009A1E9E /* translateStudy.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +135,8 @@
 				Base,
 			);
 			mainGroup = 3F820D092A1B9F20009A1E9E;
+			packageReferences = (
+			);
 			productRefGroup = 3F820D132A1B9F20009A1E9E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,6 +164,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F820D182A1B9F20009A1E9E /* ContentView.swift in Sources */,
+				8925BE992A1CF19D00118B93 /* TranslationManager.swift in Sources */,
+				8925BE972A1CF11C00118B93 /* TranslationAPI.swift in Sources */,
 				3F820D162A1B9F20009A1E9E /* translateStudyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,7 +295,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"translateStudy/Preview Content\"";
-				DEVELOPMENT_TEAM = J7T48SP5FT;
+				DEVELOPMENT_TEAM = G4C5799RK5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -296,7 +324,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"translateStudy/Preview Content\"";
-				DEVELOPMENT_TEAM = J7T48SP5FT;
+				DEVELOPMENT_TEAM = G4C5799RK5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
