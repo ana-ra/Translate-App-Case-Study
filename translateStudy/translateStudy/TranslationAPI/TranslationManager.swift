@@ -41,6 +41,8 @@ class TranslationManager: NSObject, ObservableObject {
             }
             
         })
+        sourceLanguageCode = "pt"
+        targetLanguageCode = "en"
     }
     
     private func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], completion: @escaping (_ results: [String: Any]?) -> Void) {
