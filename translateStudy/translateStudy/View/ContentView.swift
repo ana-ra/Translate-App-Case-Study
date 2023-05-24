@@ -12,13 +12,46 @@ struct ContentView: View {
     @EnvironmentObject var translationManager: TranslationManager
     @State var textInput: String = ""
     @State var textOutput: String = ""
-    @State var selectedLanguage1 = TranslationLanguage(code: "en", name: "English")
+    @State var selectedSourceLanguage = TranslationLanguage(code: "pt", name: "Portuguese")
+    @State var selectedTargetLanguage = TranslationLanguage(code: "en", name: "English")
     var body: some View {
         
-            
             VStack {
-                LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedLanguage1)
-                    .padding()
+//                Menu {
+//                    Picker(selection: $selectedLanguage1, label: Text("Sorting options")) {
+//                        Text("Size").tag(0)
+//                        Text("Date").tag(1)
+//                        Text("Location").tag(2)
+//                    }
+//                }
+//                label: {
+//                    Label("Sort", systemImage: "arrow.up.arrow.down")
+//                }
+//                Menu {
+//                    Button("1") {
+//
+//                    }
+//                    Button("2") {
+//
+//                    }
+//                } label: {
+//                    HStack{
+//                        Text("Lingua")
+//                        Text("|")
+//                            .foregroundColor(.gray)
+//                        Text(">")
+//                    }
+//                    .background(){
+//                        RoundedRectangle(cornerRadius: 14)
+//                            .foregroundColor(.gray)
+//                    }
+//                }
+                HStack{
+                    LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedSourceLanguage)
+                        .padding()
+                    LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedTargetLanguage)
+                        .padding()
+                }
 //                Text("Languages Fetched:")
 //                    .font(.system(size: 50))
                 TextField("Enter text", text: $textInput)
@@ -58,7 +91,7 @@ struct ContentView: View {
         }
     }
     
-    func translate() {
+    func translate(){
         translationManager.translate(completion: { (translation) in
             if let translationS = translation {
                 textOutput = translationS

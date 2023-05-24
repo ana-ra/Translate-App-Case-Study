@@ -32,14 +32,27 @@ struct LanguagePickerView: View {
                     }
                 }
                 
+                Text("|")
                 
-                Picker(">", selection: $selectedLanguage) {
-                    ForEach(supportedLanguages, id: \.self) { language in // 4
-                        if let languageName = language.name {
-                            Text(languageName)
+                Menu {
+                    Picker(selection: $selectedLanguage, label: Text(">")) {
+                        ForEach(supportedLanguages, id: \.self) { language in // 4
+                            if let languageName = language.name {
+                                Text(languageName)
+                            }
                         }
                     }
                 }
+                label: {
+                    Label("", systemImage: "chevron.down")
+                }
+//                Picker(selection: $selectedLanguage, label: Text(">")) {
+//                    ForEach(supportedLanguages, id: \.self) { language in // 4
+//                        if let languageName = language.name {
+//                            Text(languageName)
+//                        }
+//                    }
+//                }
             }.padding()
             
         }
