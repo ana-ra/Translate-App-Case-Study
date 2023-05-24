@@ -58,7 +58,6 @@
 				8925BE9A2A1D057D00118B93 /* TranslationAPI */,
 				8925BE952A1CEDC300118B93 /* View */,
 				3F820D152A1B9F20009A1E9E /* translateStudyApp.swift */,
-				3F820D172A1B9F20009A1E9E /* ContentView.swift */,
 				3F820D192A1B9F21009A1E9E /* Assets.xcassets */,
 				3F820D1B2A1B9F21009A1E9E /* Preview Content */,
 			);
@@ -76,6 +75,7 @@
 		8925BE952A1CEDC300118B93 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3F820D172A1B9F20009A1E9E /* ContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

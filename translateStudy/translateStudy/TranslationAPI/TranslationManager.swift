@@ -8,15 +8,13 @@
 import Foundation
 import SwiftUI
 
-class TranslationManager: NSObject {
+class TranslationManager: NSObject, ObservableObject {
     
     struct TranslationLanguage: Hashable {
         var code: String?
         var name: String?
     }
     
-    static let shared = TranslationManager()
- 
     private let apiKey = "AIzaSyAyv1YIX915PD7lwDuOz8gacjsIWxQeLJw"
     
     var sourceLanguageCode: String?
@@ -27,8 +25,22 @@ class TranslationManager: NSObject {
     
     var targetLanguageCode: String?
     
+    @Published var fetched = false
+    
     override init() {
         super.init()
+        self.fetchSupportedLanguages(completion: { (success) in
+            
+            // Check if supported languages were fetched successfully or not.
+            if success {
+                // Display languages in the tableview.
+                self.fetched = true
+            } else {
+                // Show an alert saying that something went wrong.
+                fatalError("couldn't fetch languages")
+            }
+            
+        })
     }
     
     private func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], completion: @escaping (_ results: [String: Any]?) -> Void) {
@@ -63,6 +75,7 @@ class TranslationManager: NSObject {
                                 }
                             }
                         } else {
+                            print("error")
                             completion(nil)
                         }
                     }
