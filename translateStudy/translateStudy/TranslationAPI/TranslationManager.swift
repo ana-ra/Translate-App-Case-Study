@@ -8,18 +8,18 @@
 import Foundation
 import SwiftUI
 
+struct TranslationLanguage: Hashable {
+    var code: String?
+    var name: String?
+}
+
 class TranslationManager: NSObject, ObservableObject {
-    
-    struct TranslationLanguage: Hashable {
-        var code: String?
-        var name: String?
-    }
     
     private let apiKey = "AIzaSyAyv1YIX915PD7lwDuOz8gacjsIWxQeLJw"
     
     var sourceLanguageCode: String?
     
-    var supportedLanguages = [TranslationLanguage]()
+    @Published var supportedLanguages = [TranslationLanguage]()
  
     var textToTranslate: String?
     

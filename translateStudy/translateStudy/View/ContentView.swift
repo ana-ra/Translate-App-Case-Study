@@ -12,9 +12,13 @@ struct ContentView: View {
     @EnvironmentObject var translationManager: TranslationManager
     @State var textInput: String = ""
     @State var textOutput: String = ""
+    @State var selectedLanguage1 = TranslationLanguage(code: "en", name: "English")
     var body: some View {
-        ScrollView{
+        
+            
             VStack {
+                LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedLanguage1)
+                    .padding()
 //                Text("Languages Fetched:")
 //                    .font(.system(size: 50))
                 TextField("Enter text", text: $textInput)
@@ -50,7 +54,6 @@ struct ContentView: View {
 //                        }
 //                    }
 //                }
-            }
             .padding()
         }
     }
