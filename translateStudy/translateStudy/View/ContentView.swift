@@ -17,6 +17,7 @@ struct ContentView: View {
     var body: some View {
         
             VStack {
+                
                 ZStack {
                     Rectangle()
                         .foregroundColor(.gray)
@@ -29,8 +30,6 @@ struct ContentView: View {
                     .padding()
                 }
                 
-//                Text("Languages Fetched:")
-//                    .font(.system(size: 50))
                 TextField("Enter text", text: $textInput)
                 .disableAutocorrection(true)
                 .onSubmit {
