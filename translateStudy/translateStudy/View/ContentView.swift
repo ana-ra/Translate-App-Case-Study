@@ -17,6 +17,7 @@ struct ContentView: View {
     var body: some View {
         
             VStack {
+                
                 ZStack {
                     Rectangle()
                         .foregroundColor(.gray)
@@ -29,14 +30,13 @@ struct ContentView: View {
                     .padding()
                 }
                 
-//                Text("Languages Fetched:")
-//                    .font(.system(size: 50))
                 TextField("Enter text", text: $textInput)
                 .disableAutocorrection(true)
                 .onSubmit {
                     translationManager.textToTranslate = textInput
                     translate()
                 }
+                
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
                 .font(Font.system(size: 24))
@@ -71,5 +71,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        
     }
 }
+
