@@ -23,14 +23,13 @@ struct ContentView: View {
                     LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedTargetLanguage)
                         .padding()
                 }
-//                Text("Languages Fetched:")
-//                    .font(.system(size: 50))
                 TextField("Enter text", text: $textInput)
                 .disableAutocorrection(true)
                 .onSubmit {
                     translationManager.textToTranslate = textInput
                     translate()
                 }
+                
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
                 .font(Font.system(size: 24))
@@ -62,5 +61,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        
     }
 }
+
