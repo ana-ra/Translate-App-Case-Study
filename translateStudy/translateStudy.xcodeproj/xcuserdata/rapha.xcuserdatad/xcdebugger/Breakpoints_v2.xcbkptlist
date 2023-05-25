@@ -20,5 +20,128 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2D57F4D6-E022-4070-9A0F-A3384173C802"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "translateStudy/View/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "ContentView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "2D57F4D6-E022-4070-9A0F-A3384173C802 - 24d89515046c5006"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of translateStudy.ContentView.textOutput : Swift.String"
+                  moduleName = "translateStudy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rapha/Git/translate-app-case-study/translateStudy/translateStudy/View/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "2D57F4D6-E022-4070-9A0F-A3384173C802 - b54b0db89ec7f82c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "translateStudy.ContentView.textOutput.getter : Swift.String"
+                  moduleName = "translateStudy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rapha/Git/translate-app-case-study/translateStudy/translateStudy/View/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "200">
+               </Location>
+               <Location
+                  uuid = "2D57F4D6-E022-4070-9A0F-A3384173C802 - e44f781eb5d0c838"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "translateStudy.ContentView.textOutput.setter : Swift.String"
+                  moduleName = "translateStudy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rapha/Git/translate-app-case-study/translateStudy/translateStudy/View/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "172">
+               </Location>
+               <Location
+                  uuid = "2D57F4D6-E022-4070-9A0F-A3384173C802 - a826e327bca8d42f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "translateStudy.ContentView.textOutput.modify : Swift.String"
+                  moduleName = "translateStudy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rapha/Git/translate-app-case-study/translateStudy/translateStudy/View/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "224">
+               </Location>
+               <Location
+                  uuid = "2D57F4D6-E022-4070-9A0F-A3384173C802 - 78467f655cbc1638"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "translateStudy.ContentView.textOutput.modify : Swift.String with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "translateStudy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rapha/Git/translate-app-case-study/translateStudy/translateStudy/View/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "2D57F4D6-E022-4070-9A0F-A3384173C802 - 340616b8a88e7270"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "translateStudy.ContentView.$textOutput.getter : SwiftUI.Binding&lt;Swift.String&gt;"
+                  moduleName = "translateStudy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rapha/Git/translate-app-case-study/translateStudy/translateStudy/View/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "224">
+               </Location>
+               <Location
+                  uuid = "2D57F4D6-E022-4070-9A0F-A3384173C802 - 738a07819433a130"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "translateStudy.ContentView.init() -&gt; translateStudy.ContentView"
+                  moduleName = "translateStudy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rapha/Git/translate-app-case-study/translateStudy/translateStudy/View/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "204">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
