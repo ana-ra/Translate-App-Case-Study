@@ -17,12 +17,20 @@ struct ContentView: View {
     var body: some View {
         
             VStack {
-                HStack{
-                    LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedSourceLanguage)
-                        .padding()
-                    LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedTargetLanguage)
-                        .padding()
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.gray)
+                        .frame(height: 70)
+                    HStack{
+                        LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedSourceLanguage)
+                    
+                        LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedTargetLanguage)
+                    }
+                    .padding()
                 }
+                
+//                Text("Languages Fetched:")
+//                    .font(.system(size: 50))
                 TextField("Enter text", text: $textInput)
                 .disableAutocorrection(true)
                 .onSubmit {
@@ -42,6 +50,9 @@ struct ContentView: View {
                         .shadow(radius: 2, x: -2, y: 2)
                 }
                 Text(textOutput)
+                
+                Spacer()
+
             .padding()
         }
     }
