@@ -20,11 +20,11 @@ struct LanguagePickerView: View {
             
             HStack {
                 Button {
-                    //
                 } label: {
                     VStack(alignment: .leading) {
                         if let languageName = selectedLanguage.name {
                             Text(languageName)
+                                .font(.system(size: 15))
                                 .foregroundColor(.black)
                         }
                         Text("US")
@@ -39,6 +39,7 @@ struct LanguagePickerView: View {
                         ForEach(supportedLanguages, id: \.self) { language in // 4
                             if let languageName = language.name {
                                 Text(languageName)
+                                
                             }
                         }
                     }
@@ -46,13 +47,6 @@ struct LanguagePickerView: View {
                 label: {
                     Label("", systemImage: "chevron.down")
                 }
-//                Picker(selection: $selectedLanguage, label: Text(">")) {
-//                    ForEach(supportedLanguages, id: \.self) { language in // 4
-//                        if let languageName = language.name {
-//                            Text(languageName)
-//                        }
-//                    }
-//                }
             }.padding()
             
         }
@@ -60,11 +54,3 @@ struct LanguagePickerView: View {
     
     }
 }
-
-//struct LanguagePickerView_Previews: PreviewProvider {
-//    @State var language = TranslationLanguage(code: "en", name: "English")
-//    
-//    static var previews: some View {
-//        LanguagePickerView(supportedLanguages: [TranslationLanguage(code: "en", name: "English"), TranslationLanguage(code: "pt", name: "Português")], selectedLanguage: $language)
-//    }
-//}
