@@ -1,46 +1,20 @@
-import UIKit
-import AVFoundation
+//
+//  CameraView.swift
+//  translateStudy
+//
+//  Created by Silvana Rodrigues Alves on 25/05/23.
+//
 
-class CameraView: UIView {
-    
-    private let captureSession = AVCaptureSession()
-    private let previewLayer = AVCaptureVideoPreviewLayer()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setupCamera()
+import SwiftUI
+
+struct CameraView: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        setupCamera()
+}
+
+struct CameraView_Previews: PreviewProvider {
+    static var previews: some View {
+        CameraView()
     }
-    
-    private func setupCamera() {
-        guard let device = AVCaptureDevice.default(for: .video) else {
-            print("Failed to access camera.")
-            return
-        }
-        
-        do {
-            let input = try AVCaptureDeviceInput(device: device)
-            captureSession.addInput(input)
-            
-            previewLayer.session = captureSession
-            previewLayer.videoGravity = .resizeAspectFill
-            layer.addSublayer(previewLayer)
-            
-            captureSession.startRunning()
-        } catch {
-            print("Error setting up camera input: \(error.localizedDescription)")
-        }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        previewLayer.frame = bounds
-    }
-    
 }
