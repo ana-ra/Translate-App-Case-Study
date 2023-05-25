@@ -14,6 +14,8 @@ struct ContentView: View {
     @State var textOutput: String = ""
     @State var selectedSourceLanguage = TranslationLanguage(code: "pt", name: "Portuguese")
     @State var selectedTargetLanguage = TranslationLanguage(code: "en", name: "English")
+    @FocusState private var textInputIsFocused: Bool
+    
     var body: some View {
         
             VStack {
@@ -29,30 +31,43 @@ struct ContentView: View {
                     .padding()
                 }
                 
-//                Text("Languages Fetched:")
-//                    .font(.system(size: 50))
-                TextField("Enter text", text: $textInput)
-                .disableAutocorrection(true)
-                .onSubmit {
-                    translationManager.textToTranslate = textInput
-                    translate()
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-                .font(Font.system(size: 24))
-                .background{
-                    RoundedRectangle(cornerRadius: 8)
-                        .foregroundColor(.white)
-                        .overlay{
-                            RoundedRectangle(cornerRadius: 8).stroke(.black, lineWidth: 1)
+                VStack(alignment: .leading) {
+                    Text(selectedSourceLanguage.name!)
+                        .font(.caption2)
+                        .bold()
+                        .padding(.leading)
+                    
+                    TextField("Enter text", text: $textInput)
+                        .padding(.leading)
+                        .font(.title2)
+                        .bold()
+                        .onSubmit {
+                            translationManager.textToTranslate = textInput
+                            translate()
                         }
-                        .shadow(radius: 2, x: -2, y: 2)
+                        .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
+                    
+                    Divider()
+                        .padding()
+                    
+                    Text(selectedTargetLanguage.name!)
+                        .font(.caption2)
+                        .bold()
+                        .padding(.leading)
+                        .padding(.bottom, 2)
+                        .foregroundColor(.teal)
+                    
+                    Text(textOutput)
+                        .font(.title2)
+                        .bold()
+                        .padding(.leading)
+                        .foregroundColor(.teal)
                 }
-                Text(textOutput)
+                
                 
                 Spacer()
 
-            .padding()
         }
     }
     
