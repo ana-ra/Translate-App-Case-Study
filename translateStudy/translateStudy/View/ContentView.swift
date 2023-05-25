@@ -17,41 +17,18 @@ struct ContentView: View {
     var body: some View {
         
             VStack {
-//                Menu {
-//                    Picker(selection: $selectedLanguage1, label: Text("Sorting options")) {
-//                        Text("Size").tag(0)
-//                        Text("Date").tag(1)
-//                        Text("Location").tag(2)
-//                    }
-//                }
-//                label: {
-//                    Label("Sort", systemImage: "arrow.up.arrow.down")
-//                }
-//                Menu {
-//                    Button("1") {
-//
-//                    }
-//                    Button("2") {
-//
-//                    }
-//                } label: {
-//                    HStack{
-//                        Text("Lingua")
-//                        Text("|")
-//                            .foregroundColor(.gray)
-//                        Text(">")
-//                    }
-//                    .background(){
-//                        RoundedRectangle(cornerRadius: 14)
-//                            .foregroundColor(.gray)
-//                    }
-//                }
-                HStack{
-                    LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedSourceLanguage)
-                        .padding()
-                    LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedTargetLanguage)
-                        .padding()
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.gray)
+                        .frame(height: 70)
+                    HStack{
+                        LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedSourceLanguage)
+                    
+                        LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedTargetLanguage)
+                    }
+                    .padding()
                 }
+                
 //                Text("Languages Fetched:")
 //                    .font(.system(size: 50))
                 TextField("Enter text", text: $textInput)
@@ -72,21 +49,9 @@ struct ContentView: View {
                         .shadow(radius: 2, x: -2, y: 2)
                 }
                 Text(textOutput)
-                //Text()
-//                if(translationManager.fetched){
-//                    ForEach(translationManager.supportedLanguages, id: \.self){ language in
-//                        HStack{
-//                            if let code = language.code {
-//                                Text(code)
-//                            }
-//                            Text("-")
-//                            if let name = language.name {
-//                                Text(name)
-//                            }
-//
-//                        }
-//                    }
-//                }
+                
+                Spacer()
+
             .padding()
         }
     }
