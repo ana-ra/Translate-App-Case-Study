@@ -25,6 +25,10 @@ struct ContentView: View {
     @State var translationHappened: Bool = false
     @State var selectedLanguage: LanguageType = LanguageType.none
     
+    @StateObject var speechRecognizer = SpeechRecognizer()
+    
+    @State var recording: Bool = false
+    
     var body: some View {
         
         ZStack {
@@ -53,87 +57,108 @@ struct ContentView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(.white)
                     .overlay {
-                        VStack(alignment: .leading) {
-                            if translationHappened {
-                                Text(selectedSourceLanguage.name!)
-                                    .foregroundColor(.black)
-                                    .font(.caption2)
-                                    .bold()
-                                    .padding(.leading)
-                                    .padding(.top)
-                            }
-                            
-                            if textInputIsFocused {
-                                HStack {
-                                    Spacer()
-                                    Image(systemName: "xmark.circle.fill")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 28, height: 28)
-                                        .symbolRenderingMode(.hierarchical)
-                                        .foregroundColor(.secondary)
-                                        .onTapGesture {
-                                            withAnimation(.spring()) {
-                                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                                                textInputIsFocused = false
-                                            }
-                                            
-                                        }
-                                }
-                            }
-                             
-                            TextField("Enter text", text: $textInput)
-                                .foregroundColor(.black)
-                                .padding(.leading)
-                                .font(.title2)
-                                .bold()
-                                .onTapGesture {
-                                    withAnimation(.spring()) {
-                                        textInputIsFocused = true
-                                        selectedLanguage = LanguageType.source
-                                    }
-                                }
-                                .onSubmit {
-                                    translationManager.textToTranslate = textInput
-                                    if textInput != "" {
-                                        translate()
-                                        withAnimation(.spring()) {
-                                            translationHappened = true
-                                            textInputIsFocused = false
-                                            
-                                        }
-                                    }
-                                    
-                                    
-                                }
-                                .textInputAutocapitalization(.never)
-                                .disableAutocorrection(true)
-                                .padding(.top)
-                            
-                            if translationHappened {
-                                Divider()
-                                    .padding()
-                                
-                                Text(selectedTargetLanguage.name!)
-                                    .font(.caption2)
-                                    .bold()
-                                    .padding(.leading)
+                        ZStack {
+                            VStack {
+                                Spacer()
+                                Image(systemName: "mic.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 55)
                                     .foregroundColor(.teal)
+                                    .onTapGesture {
+                                        if !recording {
+                                            speechRecognizer.resetTranscript()
+                                            speechRecognizer.startTranscribing()
+                                            recording = true
+                                        } else {
+                                            speechRecognizer.stopTranscribing()
+                                            recording = false
+                                            textInput = speechRecognizer.transcript
+                                            translationManager.textToTranslate = textInput
+                                            translate()
+                                            translationHappened = true
+                                        }
+                                    }
+                            }
+                            VStack(alignment: .leading) {
+                                if translationHappened {
+                                    Text(selectedSourceLanguage.name!)
+                                        .foregroundColor(.black)
+                                        .font(.caption2)
+                                        .bold()
+                                        .padding(.leading)
+                                        .padding(.top)
+                                }
                                 
-                                Text(textOutput)
+                                if textInputIsFocused {
+                                    HStack {
+                                        Spacer()
+                                        Image(systemName: "xmark.circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 28, height: 28)
+                                            .symbolRenderingMode(.hierarchical)
+                                            .foregroundColor(.secondary)
+                                            .onTapGesture {
+                                                withAnimation(.spring()) {
+                                                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                                    textInputIsFocused = false
+                                                }
+                                                
+                                            }
+                                    }
+                                }
+                                
+                                TextField("Enter text", text: $textInput)
+                                    .foregroundColor(.black)
+                                    .padding(.leading)
                                     .font(.title2)
                                     .bold()
-                                    .padding(.leading)
-                                    .foregroundColor(.teal)
+                                    .onTapGesture {
+                                        withAnimation(.spring()) {
+                                            textInputIsFocused = true
+                                            selectedLanguage = LanguageType.source
+                                        }
+                                    }
+                                    .onSubmit {
+                                        translationManager.textToTranslate = textInput
+                                        if textInput != "" {
+                                            translate()
+                                            withAnimation(.spring()) {
+                                                translationHappened = true
+                                                textInputIsFocused = false
+                                                
+                                            }
+                                        }
+                                        
+                                        
+                                    }
+                                    .textInputAutocapitalization(.never)
+                                    .disableAutocorrection(true)
+                                    .padding(.top)
+                                
+                                if translationHappened {
+                                    Divider()
+                                        .padding()
+                                    
+                                    Text(selectedTargetLanguage.name!)
+                                        .font(.caption2)
+                                        .bold()
+                                        .padding(.leading)
+                                        .foregroundColor(.teal)
+                                    
+                                    Text(textOutput)
+                                        .font(.title2)
+                                        .bold()
+                                        .padding(.leading)
+                                        .foregroundColor(.teal)
+                                }
+                                Spacer()
+                                
                             }
-                            
-                            
-                            Spacer()
                         }
                         .padding()
                     }
-                    
-                    
                     
                     Spacer()
 

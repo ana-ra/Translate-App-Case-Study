@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B31539B2A20F2480012851F /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B31539A2A20F2480012851F /* SpeechRecognizer.swift */; };
+		3B31539D2A20F6260012851F /* Recents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B31539C2A20F6260012851F /* Recents.swift */; };
 		3F820D162A1B9F20009A1E9E /* translateStudyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F820D152A1B9F20009A1E9E /* translateStudyApp.swift */; };
 		3F820D182A1B9F20009A1E9E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F820D172A1B9F20009A1E9E /* ContentView.swift */; };
 		3F820D1A2A1B9F21009A1E9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F820D192A1B9F21009A1E9E /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B31539A2A20F2480012851F /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
+		3B31539C2A20F6260012851F /* Recents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recents.swift; sourceTree = "<group>"; };
 		3F820D122A1B9F20009A1E9E /* translateStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = translateStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F820D152A1B9F20009A1E9E /* translateStudyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = translateStudyApp.swift; sourceTree = "<group>"; };
 		3F820D172A1B9F20009A1E9E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -49,6 +53,8 @@
 		3F820D092A1B9F20009A1E9E = {
 			isa = PBXGroup;
 			children = (
+				3B31539C2A20F6260012851F /* Recents.swift */,
+				3B31539A2A20F2480012851F /* SpeechRecognizer.swift */,
 				3F820D142A1B9F20009A1E9E /* translateStudy */,
 				3F820D132A1B9F20009A1E9E /* Products */,
 			);
@@ -181,11 +187,13 @@
 				3FEA4CD72A1FA25D001A9850 /* TabBarView.swift in Sources */,
 				3FEA4CDB2A1FA3A2001A9850 /* CameraView.swift in Sources */,
 				3F820D182A1B9F20009A1E9E /* ContentView.swift in Sources */,
+				3B31539B2A20F2480012851F /* SpeechRecognizer.swift in Sources */,
 				8925BE992A1CF19D00118B93 /* TranslationManager.swift in Sources */,
 				8925BE972A1CF11C00118B93 /* TranslationAPI.swift in Sources */,
 				3F820D162A1B9F20009A1E9E /* translateStudyApp.swift in Sources */,
 				AE2FD2AC2A1E559C003E40B9 /* LanguagePickerView.swift in Sources */,
 				3FEA4CDD2A1FA3B2001A9850 /* ConversationView.swift in Sources */,
+				3B31539D2A20F6260012851F /* Recents.swift in Sources */,
 				3FEA4CE02A1FA3CB001A9850 /* FavoritesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,6 +326,8 @@
 				DEVELOPMENT_TEAM = G4C5799RK5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "ta gravando blz?";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "ta usando blz?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -347,6 +357,8 @@
 				DEVELOPMENT_TEAM = G4C5799RK5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "ta gravando blz?";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "ta usando blz?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
