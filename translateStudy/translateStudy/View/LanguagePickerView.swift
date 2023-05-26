@@ -31,68 +31,70 @@ struct LanguagePickerView: View {
     
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
-            .foregroundColor(.white)
-            .frame(height: 50)
-            .overlay {
-                HStack {
-                    // button with language name
-                    Button {
-                        if !selected {
-                            selected.toggle()
+        .foregroundColor(.white)
+        .frame(height: 50)
+        .overlay {
+            HStack {
+                // button with language name
+                Button {
+                    if !selected {
+                        selected.toggle()
+                    }
+                    
+                } label: {
+                    HStack {
+                        if selected {
+                            Image(systemName: "smallcircle.filled.circle.fill")
+                                .foregroundStyle(.teal, .teal.opacity(0.5))
+                                .font(.subheadline)
+                                .padding(.leading)
+                        } else {
+                            Image(systemName: "smallcircle.filled.circle.fill")
+                                .foregroundColor(.white)
+                                .font(.subheadline)
+                                .padding(.leading)
                         }
                         
-                    } label: {
-                        HStack {
-                            if selected {
-                                Image(systemName: "smallcircle.filled.circle.fill")
-                                    .foregroundStyle(.teal, .teal.opacity(0.5))
-                                    .font(.callout)
-                                    .padding(.leading)
-                            } else {
-                                Image(systemName: "smallcircle.filled.circle.fill")
-                                    .foregroundColor(.white)
-                                    .font(.callout)
-                                    .padding(.leading)
+                        
+                        VStack(alignment: .leading) {
+                            if let languageName = selectedLanguage.name {
+                                Text(languageName)
+                                    .foregroundColor(.black)
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
                             }
-                            
-                            
-                            VStack(alignment: .leading) {
-                                if let languageName = selectedLanguage.name {
-                                    Text(languageName)
-                                        .foregroundColor(.black)
-                                        .font(.footnote)
-                                }
-                                //                            Text("US")
-                                //                                .foregroundColor(.gray)
-                                //                                .font(.footnote)
-                            }
-                            
-                            Spacer()
+//                            Text("US")
+//                                .foregroundColor(.gray)
+//                                .font(.footnote)
                         }
+                        
+                        Spacer()
                     }
-                    .padding(.trailing, 0)
-                    
-                    // divider
-                    Rectangle()
-                        .foregroundColor(.gray)
-                        .padding(.vertical, 0)
-                        .frame(width: 2)
-                    
-                    // picker button
-                    Menu {
-                        Picker(selection: $selectedLanguage, label: Text(">")) {
-                            ForEach(supportedLanguages, id: \.self) { language in // 4
-                                if let languageName = language.name {
-                                    Text(languageName)
-                                }
+                }
+                .padding(.trailing, 0)
+                
+                // divider
+                Rectangle()
+                    .foregroundColor(Color(.systemGray6))
+                    .padding(.vertical, 0)
+                    .frame(width: 2)
+                
+                // picker button
+                Menu {
+                    Picker(selection: $selectedLanguage, label: Text("")) {
+                        ForEach(supportedLanguages, id: \.self) { language in // 4
+                            if let languageName = language.name {
+                                Text(languageName)
                             }
                         }
                     }
-                    
+                }
+
                 label: {
                     Label("", systemImage: "chevron.down")
                         .foregroundColor(.cyan)
                         .font(.callout)
+                        .padding(.bottom, 2)
                 }
                 }
             }
