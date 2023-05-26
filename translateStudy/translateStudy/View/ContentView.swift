@@ -8,14 +8,22 @@
 import Foundation
 import SwiftUI
 
+enum LanguageType {
+    case source
+    case target
+    case none
+}
+
 struct ContentView: View {
     @EnvironmentObject var translationManager: TranslationManager
     @State var textInput: String = ""
     @State var textOutput: String = ""
     @State var selectedSourceLanguage = TranslationLanguage(code: "pt", name: "Portuguese")
     @State var selectedTargetLanguage = TranslationLanguage(code: "en", name: "English")
-    @FocusState private var textInputIsFocused: Bool
+    @State private var textInputIsFocused: Bool = false
+
     @State var translationHappened: Bool = false
+    @State var selectedLanguage: LanguageType = LanguageType.none
     
     var body: some View {
         
@@ -32,9 +40,11 @@ struct ContentView: View {
             
             VStack {
                 HStack{
-                    LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedSourceLanguage)
-                
-                    LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedTargetLanguage)
+
+                    LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, pickerLanguage: $selectedSourceLanguage, languageType: LanguageType.source, selectedLanguage: $selectedLanguage)
+                    
+                    LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, pickerLanguage: $selectedTargetLanguage, languageType: LanguageType.target, selectedLanguage: $selectedLanguage)
+                    
                 }
                 .padding(.top)
                 .padding(.horizontal)
@@ -52,22 +62,53 @@ struct ContentView: View {
                                     .padding(.leading)
                                     .padding(.top)
                             }
+                            
+                            if textInputIsFocused {
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: "xmark.circle.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 28, height: 28)
+                                        .symbolRenderingMode(.hierarchical)
+                                        .foregroundColor(.secondary)
+                                        .onTapGesture {
+                                            withAnimation(.spring()) {
+                                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                                textInputIsFocused = false
+                                            }
+                                            
+                                        }
+                                }
+                            }
                              
                             TextField("Enter text", text: $textInput)
                                 .foregroundColor(.black)
                                 .padding(.leading)
                                 .font(.title2)
                                 .bold()
+                                .onTapGesture {
+                                    withAnimation(.spring()) {
+                                        textInputIsFocused = true
+                                        selectedLanguage = LanguageType.source
+                                    }
+                                }
                                 .onSubmit {
                                     translationManager.textToTranslate = textInput
-                                    translate()
-                                    withAnimation(.spring()) {
-                                        translationHappened = true
+                                    if textInput != "" {
+                                        translate()
+                                        withAnimation(.spring()) {
+                                            translationHappened = true
+                                            textInputIsFocused = false
+                                            
+                                        }
                                     }
+                                    
                                     
                                 }
                                 .textInputAutocapitalization(.never)
                                 .disableAutocorrection(true)
+                                .padding(.top)
                             
                             if translationHappened {
                                 Divider()
