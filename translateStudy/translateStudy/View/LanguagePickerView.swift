@@ -26,8 +26,9 @@ extension View {
 
 struct LanguagePickerView: View {
     var supportedLanguages: [TranslationLanguage]
-    @Binding var selectedLanguage: TranslationLanguage
-    @State var selected: Bool = false
+    @Binding var pickerLanguage: TranslationLanguage
+    var languageType: LanguageType
+    @Binding var selectedLanguage: LanguageType
     
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
@@ -37,13 +38,13 @@ struct LanguagePickerView: View {
             HStack {
                 // button with language name
                 Button {
-                    if !selected {
-                        selected.toggle()
+                    withAnimation(.spring()) {
+                        selectedLanguage = languageType
                     }
                     
                 } label: {
                     HStack {
-                        if selected {
+                        if selectedLanguage == languageType {
                             Image(systemName: "smallcircle.filled.circle.fill")
                                 .foregroundStyle(.teal, .teal.opacity(0.5))
                                 .font(.subheadline)
@@ -57,7 +58,7 @@ struct LanguagePickerView: View {
                         
                         
                         VStack(alignment: .leading) {
-                            if let languageName = selectedLanguage.name {
+                            if let languageName = pickerLanguage.name {
                                 Text(languageName)
                                     .foregroundColor(.black)
                                     .font(.subheadline)
@@ -81,7 +82,7 @@ struct LanguagePickerView: View {
                 
                 // picker button
                 Menu {
-                    Picker(selection: $selectedLanguage, label: Text("")) {
+                    Picker(selection: $pickerLanguage, label: Text("")) {
                         ForEach(supportedLanguages, id: \.self) { language in // 4
                             if let languageName = language.name {
                                 Text(languageName)
