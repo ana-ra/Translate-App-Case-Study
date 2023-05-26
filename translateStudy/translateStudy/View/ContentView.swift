@@ -20,12 +20,17 @@ struct ContentView: View {
     var body: some View {
         
         ZStack {
-            Rectangle()
-                .foregroundColor(Color(.systemGray6))
-                .ignoresSafeArea()
+            VStack {
+                Rectangle()
+                    .foregroundColor(Color(.systemGray6))
+                    .frame(height: 500)
+                    
+                Spacer()
+            }
+            .ignoresSafeArea()
+            
             
             VStack {
-                 
                 HStack{
                     LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedSourceLanguage)
                 
@@ -109,6 +114,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        TabBarView()
+            .environmentObject(TranslationManager())
+        
     }
 }

@@ -89,21 +89,15 @@ struct LanguagePickerView: View {
                         }
                     }
                 }
+
                 label: {
                     Label("", systemImage: "chevron.down")
                         .foregroundColor(.cyan)
                         .font(.callout)
                         .padding(.bottom, 2)
                 }
+                }
             }
-        }
     }
+    
 }
-
-//struct LanguagePickerView_Previews: PreviewProvider {
-//    @State var language = TranslationLanguage(code: "en", name: "English")
-//    
-//    static var previews: some View {
-//        LanguagePickerView(supportedLanguages: [TranslationLanguage(code: "en", name: "English"), TranslationLanguage(code: "pt", name: "Português")], selectedLanguage: $language)
-//    }
-//}
