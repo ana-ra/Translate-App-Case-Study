@@ -15,59 +15,83 @@ struct ContentView: View {
     @State var selectedSourceLanguage = TranslationLanguage(code: "pt", name: "Portuguese")
     @State var selectedTargetLanguage = TranslationLanguage(code: "en", name: "English")
     @FocusState private var textInputIsFocused: Bool
+    @State var translationHappened: Bool = false
     
     var body: some View {
         
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color(.systemGray6))
+                .ignoresSafeArea()
+            
             VStack {
-                ZStack {
-                    Rectangle()
-                        .foregroundColor(.gray)
-                        .frame(height: 70)
-                    HStack{
-                        LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedSourceLanguage)
-                    
-                        LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedTargetLanguage)
-                    }
-                    .padding()
-                }
+                 
+                HStack{
+                    LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedSourceLanguage)
                 
-                VStack(alignment: .leading) {
-                    Text(selectedSourceLanguage.name!)
-                        .font(.caption2)
-                        .bold()
-                        .padding(.leading)
+                    LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, selectedLanguage: $selectedTargetLanguage)
+                }
+                .padding(.top)
+                .padding(.horizontal)
+                .padding(.bottom, 8)
                     
-                    TextField("Enter text", text: $textInput)
-                        .padding(.leading)
-                        .font(.title2)
-                        .bold()
-                        .onSubmit {
-                            translationManager.textToTranslate = textInput
-                            translate()
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(.white)
+                    .overlay {
+                        VStack(alignment: .leading) {
+                            if translationHappened {
+                                Text(selectedSourceLanguage.name!)
+                                    .foregroundColor(.black)
+                                    .font(.caption2)
+                                    .bold()
+                                    .padding(.leading)
+                                    .padding(.top)
+                            }
+                             
+                            TextField("Enter text", text: $textInput)
+                                .foregroundColor(.black)
+                                .padding(.leading)
+                                .font(.title2)
+                                .bold()
+                                .onSubmit {
+                                    translationManager.textToTranslate = textInput
+                                    translate()
+                                    withAnimation(.spring()) {
+                                        translationHappened = true
+                                    }
+                                    
+                                }
+                                .textInputAutocapitalization(.never)
+                                .disableAutocorrection(true)
+                            
+                            if translationHappened {
+                                Divider()
+                                    .padding()
+                                
+                                Text(selectedTargetLanguage.name!)
+                                    .font(.caption2)
+                                    .bold()
+                                    .padding(.leading)
+                                    .foregroundColor(.teal)
+                                
+                                Text(textOutput)
+                                    .font(.title2)
+                                    .bold()
+                                    .padding(.leading)
+                                    .foregroundColor(.teal)
+                            }
+                            
+                            
+                            Spacer()
                         }
-                        .textInputAutocapitalization(.never)
-                        .disableAutocorrection(true)
-                    
-                    Divider()
                         .padding()
+                    }
                     
-                    Text(selectedTargetLanguage.name!)
-                        .font(.caption2)
-                        .bold()
-                        .padding(.leading)
-                        .padding(.bottom, 2)
-                        .foregroundColor(.teal)
                     
-                    Text(textOutput)
-                        .font(.title2)
-                        .bold()
-                        .padding(.leading)
-                        .foregroundColor(.teal)
-                }
-                
-                
-                Spacer()
+                    
+                    Spacer()
 
+            }
         }
     }
     

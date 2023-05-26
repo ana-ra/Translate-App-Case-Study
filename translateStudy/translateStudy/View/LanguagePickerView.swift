@@ -46,12 +46,12 @@ struct LanguagePickerView: View {
                         if selected {
                             Image(systemName: "smallcircle.filled.circle.fill")
                                 .foregroundStyle(.teal, .teal.opacity(0.5))
-                                .font(.callout)
+                                .font(.subheadline)
                                 .padding(.leading)
                         } else {
                             Image(systemName: "smallcircle.filled.circle.fill")
                                 .foregroundColor(.white)
-                                .font(.callout)
+                                .font(.subheadline)
                                 .padding(.leading)
                         }
                         
@@ -60,7 +60,8 @@ struct LanguagePickerView: View {
                             if let languageName = selectedLanguage.name {
                                 Text(languageName)
                                     .foregroundColor(.black)
-                                    .font(.footnote)
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
                             }
 //                            Text("US")
 //                                .foregroundColor(.gray)
@@ -74,13 +75,13 @@ struct LanguagePickerView: View {
                 
                 // divider
                 Rectangle()
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color(.systemGray6))
                     .padding(.vertical, 0)
                     .frame(width: 2)
                 
                 // picker button
                 Menu {
-                    Picker(selection: $selectedLanguage, label: Text(">")) {
+                    Picker(selection: $selectedLanguage, label: Text("")) {
                         ForEach(supportedLanguages, id: \.self) { language in // 4
                             if let languageName = language.name {
                                 Text(languageName)
@@ -92,6 +93,7 @@ struct LanguagePickerView: View {
                     Label("", systemImage: "chevron.down")
                         .foregroundColor(.cyan)
                         .font(.callout)
+                        .padding(.bottom, 2)
                 }
             }
         }
