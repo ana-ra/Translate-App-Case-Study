@@ -8,29 +8,37 @@
 import SwiftUI
 
 struct TabBarView: View {
-        var body: some View {
+    @State private var isDarkMode = false
+    
+    var body: some View {
         TabView {
-            
             ContentView()
                 .tabItem {
                     Label("Translation", systemImage: "bubble.left.and.exclamationmark.bubble.right.fill")
                 }
-    
+                .preferredColorScheme(isDarkMode ? .dark : .none)
+            
             CameraView()
                 .tabItem {
                     Label("Camera", systemImage: "camera.fill")
                 }
+                .onAppear {
+                    isDarkMode = true
+                }
+                .onDisappear {
+                    isDarkMode = false
+                }
+            
             ConversationView()
                 .tabItem {
                     Label("Conversation", systemImage: "person.2.fill")
                 }
+            
             FavoritesView()
                 .tabItem {
                     Label("Favorites", systemImage: "star.fill")
                 }
         }
-        .toolbarBackground(Color.white, for: .tabBar)
-
     }
 }
 

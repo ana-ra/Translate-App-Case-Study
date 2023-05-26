@@ -6,14 +6,12 @@
 //
 
 import SwiftUI
+import Foundation
 
 @main
 struct translateStudyApp: App {
     @StateObject private var translationManager = TranslationManager()
-    
-
     var body: some Scene {
-        
         WindowGroup {
             TabBarView()
                 .environmentObject(translationManager)
