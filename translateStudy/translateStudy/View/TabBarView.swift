@@ -28,6 +28,7 @@ struct TabBarView: View {
                     Label("Favorites", systemImage: "star.fill")
                 }
         }
+            
 
     }
 }
@@ -35,5 +36,7 @@ struct TabBarView: View {
 struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
         TabBarView()
+            .environmentObject(TranslationManager())
+        
     }
 }

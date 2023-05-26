@@ -13,7 +13,7 @@ struct translateStudyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabBarView()
                 .environmentObject(translationManager)
         }
     }
