@@ -65,8 +65,8 @@ struct ContentView: View {
                         .padding(.leading)
                         .foregroundColor(.teal)
                 }
-                
-                
+                    
+            
                 Spacer()
 
         }
@@ -86,7 +86,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        TabBarView()
+            .environmentObject(TranslationManager())
         
     }
 }
