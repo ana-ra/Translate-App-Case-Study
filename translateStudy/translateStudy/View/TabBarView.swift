@@ -15,6 +15,7 @@ struct TabBarView: View {
                 .tabItem {
                     Label("Translation", systemImage: "bubble.left.and.exclamationmark.bubble.right.fill")
                 }
+    
             CameraView()
                 .tabItem {
                     Label("Camera", systemImage: "camera.fill")
@@ -28,7 +29,7 @@ struct TabBarView: View {
                     Label("Favorites", systemImage: "star.fill")
                 }
         }
-            
+        .toolbarBackground(Color.white, for: .tabBar)
 
     }
 }
