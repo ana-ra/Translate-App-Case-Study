@@ -10,7 +10,7 @@
 		3B31539B2A20F2480012851F /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B31539A2A20F2480012851F /* SpeechRecognizer.swift */; };
 		3B31539D2A20F6260012851F /* Recents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B31539C2A20F6260012851F /* Recents.swift */; };
 		3F820D162A1B9F20009A1E9E /* translateStudyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F820D152A1B9F20009A1E9E /* translateStudyApp.swift */; };
-		3F820D182A1B9F20009A1E9E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F820D172A1B9F20009A1E9E /* ContentView.swift */; };
+		3F820D182A1B9F20009A1E9E /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F820D172A1B9F20009A1E9E /* TranslationView.swift */; };
 		3F820D1A2A1B9F21009A1E9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F820D192A1B9F21009A1E9E /* Assets.xcassets */; };
 		3F820D1D2A1B9F21009A1E9E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F820D1C2A1B9F21009A1E9E /* Preview Assets.xcassets */; };
 		3FEA4CD72A1FA25D001A9850 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEA4CD62A1FA25D001A9850 /* TabBarView.swift */; };
@@ -27,7 +27,7 @@
 		3B31539C2A20F6260012851F /* Recents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recents.swift; sourceTree = "<group>"; };
 		3F820D122A1B9F20009A1E9E /* translateStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = translateStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F820D152A1B9F20009A1E9E /* translateStudyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = translateStudyApp.swift; sourceTree = "<group>"; };
-		3F820D172A1B9F20009A1E9E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3F820D172A1B9F20009A1E9E /* TranslationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationView.swift; sourceTree = "<group>"; };
 		3F820D192A1B9F21009A1E9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F820D1C2A1B9F21009A1E9E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3FEA4CD62A1FA25D001A9850 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
@@ -53,8 +53,6 @@
 		3F820D092A1B9F20009A1E9E = {
 			isa = PBXGroup;
 			children = (
-				3B31539C2A20F6260012851F /* Recents.swift */,
-				3B31539A2A20F2480012851F /* SpeechRecognizer.swift */,
 				3F820D142A1B9F20009A1E9E /* translateStudy */,
 				3F820D132A1B9F20009A1E9E /* Products */,
 			);
@@ -71,6 +69,7 @@
 		3F820D142A1B9F20009A1E9E /* translateStudy */ = {
 			isa = PBXGroup;
 			children = (
+				AE67665C2A24CA6300B7F93E /* Speech */,
 				8925BE9A2A1D057D00118B93 /* TranslationAPI */,
 				8925BE952A1CEDC300118B93 /* View */,
 				3F820D152A1B9F20009A1E9E /* translateStudyApp.swift */,
@@ -91,7 +90,7 @@
 		8925BE952A1CEDC300118B93 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3F820D172A1B9F20009A1E9E /* ContentView.swift */,
+				3F820D172A1B9F20009A1E9E /* TranslationView.swift */,
 				AE2FD2AB2A1E559C003E40B9 /* LanguagePickerView.swift */,
 				3FEA4CD62A1FA25D001A9850 /* TabBarView.swift */,
 				3FEA4CDA2A1FA3A2001A9850 /* CameraView.swift */,
@@ -108,6 +107,15 @@
 				8925BE962A1CF11C00118B93 /* TranslationAPI.swift */,
 			);
 			path = TranslationAPI;
+			sourceTree = "<group>";
+		};
+		AE67665C2A24CA6300B7F93E /* Speech */ = {
+			isa = PBXGroup;
+			children = (
+				3B31539A2A20F2480012851F /* SpeechRecognizer.swift */,
+				3B31539C2A20F6260012851F /* Recents.swift */,
+			);
+			path = Speech;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,7 +194,7 @@
 			files = (
 				3FEA4CD72A1FA25D001A9850 /* TabBarView.swift in Sources */,
 				3FEA4CDB2A1FA3A2001A9850 /* CameraView.swift in Sources */,
-				3F820D182A1B9F20009A1E9E /* ContentView.swift in Sources */,
+				3F820D182A1B9F20009A1E9E /* TranslationView.swift in Sources */,
 				3B31539B2A20F2480012851F /* SpeechRecognizer.swift in Sources */,
 				8925BE992A1CF19D00118B93 /* TranslationManager.swift in Sources */,
 				8925BE972A1CF11C00118B93 /* TranslationAPI.swift in Sources */,
