@@ -12,41 +12,114 @@ struct RecentsCardView: View {
     var targetLanguage: TranslationLanguage
     var sourceText: String
     var translatedText: String
+    @State var cardOpen: Bool = false
+    @State var favorited: Bool = false
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(sourceLanguage.name!)
-                    .font(.callout)
-                    .fontWeight(.medium)
+        if !cardOpen {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(sourceLanguage.name!)
+                        .font(.callout)
+                        .fontWeight(.medium)
+                    
+                    Text(sourceText)
+                        .font(.title3)
+                        .bold()
+                        .padding(.bottom)
+                    
+                    
+                    
+                    Text(targetLanguage.name!)
+                        .font(.callout)
+                        .fontWeight(.medium)
+                        .foregroundColor(.teal)
+                    
+                    Text(translatedText)
+                        .font(.title3)
+                        .bold()
+                        .foregroundColor(.teal)
+                }
+                .padding()
                 
-                Text(sourceText)
-                    .font(.title3)
-                    .bold()
-                    .padding(.bottom)
-                
-                
-                
-                Text(targetLanguage.name!)
-                    .font(.callout)
-                    .fontWeight(.medium)
-                    .foregroundColor(.teal)
-                
-                Text(translatedText)
-                    .font(.title3)
-                    .bold()
-                    .foregroundColor(.teal)
+                Spacer()
+                 
+            }.background {
+                RoundedRectangle(cornerRadius: 8)
+                    .foregroundColor(.white)
             }
             .padding()
+            .onTapGesture {
+                withAnimation(.spring()) {
+                    cardOpen.toggle()
+                }
+            }
             
-            Spacer()
-             
-        }.background {
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(.white)
-        }
-        
+        } else {
+            HStack {
+                // translation texts
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(sourceLanguage.name!)
+                        .foregroundColor(.black)
+                        .font(.caption2)
+                        .bold()
+                        .padding(.leading)
+                        .padding(.top)
 
+                    Text(sourceText)
+                        .foregroundColor(.black)
+                        .padding(.leading)
+                        .font(.title2)
+                        .bold()
+                    
+                    Divider()
+                        .padding()
+                    
+                    Text(targetLanguage.name!)
+                        .font(.caption2)
+                        .bold()
+                        .padding(.leading)
+                        .foregroundColor(.teal)
+
+                    Text(translatedText)
+                        .font(.title2)
+                        .bold()
+                        .padding(.leading)
+                        .padding(.top, 2)
+                        .foregroundColor(.teal)
+                    
+                    HStack {
+                        Spacer()
+                        
+                        Image(systemName: favorited ? "star.fill" : "star")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 28)
+                            .foregroundColor(.teal)
+                            .onTapGesture {
+                                favorited.toggle()
+                            }
+                            
+                        
+                        Image(systemName: "play.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 28)
+                            .foregroundColor(.teal)
+                            .padding(.leading, 8)
+                        
+                        
+                    }.padding()
+                    
+                }
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 8)
+                            .foregroundColor(.white)
+                        }
+            }
+            Spacer()
+        }
     }
 }
 

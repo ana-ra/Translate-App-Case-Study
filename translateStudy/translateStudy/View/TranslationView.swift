@@ -216,23 +216,21 @@ struct TranslationView: View {
                                         .textInputAutocapitalization(.never)
                                         .disableAutocorrection(true)
                                     
-                                    if translationHappened {
-                                        Divider()
-                                            .padding()
-                                        
-                                        Text(selectedTargetLanguage.name!)
-                                            .font(.caption2)
-                                            .bold()
-                                            .padding(.leading)
-                                            .foregroundColor(.teal)
-                                        
-                                        Text(textOutput)
-                                            .font(.title2)
-                                            .bold()
-                                            .padding(.leading)
-                                            .padding(.top, 2)
-                                            .foregroundColor(.teal)
-                                    }
+                                    Divider()
+                                        .padding()
+                                    
+                                    Text(selectedTargetLanguage.name!)
+                                        .font(.caption2)
+                                        .bold()
+                                        .padding(.leading)
+                                        .foregroundColor(.teal)
+                                    
+                                    Text(textOutput)
+                                        .font(.title2)
+                                        .bold()
+                                        .padding(.leading)
+                                        .padding(.top, 2)
+                                        .foregroundColor(.teal)
                                     Spacer()
                                     
                                 }
