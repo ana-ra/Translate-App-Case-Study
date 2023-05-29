@@ -12,7 +12,7 @@ struct TabBarView: View {
     
     var body: some View {
         TabView {
-            ContentView()
+            TranslationView()
                 .tabItem {
                     Label("Translation", systemImage: "bubble.left.and.exclamationmark.bubble.right.fill")
                 }
