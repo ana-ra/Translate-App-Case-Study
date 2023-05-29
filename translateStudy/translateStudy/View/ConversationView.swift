@@ -9,7 +9,34 @@ import SwiftUI
 
 struct ConversationView: View {
     var body: some View {
-        Text("Aqui vai as conversation")
+        VStack() {
+            HStack() {
+                Text("Conversations")
+                    .font(.largeTitle)
+                    .bold()
+                Spacer()
+            }
+            .padding(.top, 16)
+            Spacer()
+            
+            VStack{
+                Image(systemName: "figure.2.arms.open")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 55, height: 55)
+                    .padding(.bottom, 8)
+                    .foregroundColor(.gray)
+                Text("No conversations")
+                    .bold()
+                    .font(.title2)
+                Text("Your conversations translataions will appear here.")
+                    .foregroundColor(Color(.gray))
+                    .font(.subheadline)
+                
+            }
+            Spacer()
+        }
+        .padding()
     }
 }
 
