@@ -25,6 +25,7 @@ struct FavoritesView: View {
                     Spacer()
                 }
                 .padding(.top, 16)
+                .padding(.leading)
                 
                 if favoritesEmpty {
                     Spacer()
@@ -56,6 +57,7 @@ struct FavoritesView: View {
                             .bold()
                             .padding(.top, 4)
                             .padding(.bottom)
+                            .padding(.leading)
                         
                         RecentsCardView(sourceLanguage: TranslationLanguage(code: "en", name: "English"), targetLanguage: TranslationLanguage(code: "pt", name: "Português"), sourceText: "oi", translatedText: "hi")
                     }
@@ -65,7 +67,6 @@ struct FavoritesView: View {
 
                 
             }
-            .padding()
         }
     }
 }
