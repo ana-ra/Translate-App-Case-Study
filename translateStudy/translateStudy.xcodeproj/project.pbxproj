@@ -20,6 +20,7 @@
 		8925BE972A1CF11C00118B93 /* TranslationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8925BE962A1CF11C00118B93 /* TranslationAPI.swift */; };
 		8925BE992A1CF19D00118B93 /* TranslationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8925BE982A1CF19D00118B93 /* TranslationManager.swift */; };
 		AE2FD2AC2A1E559C003E40B9 /* LanguagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2FD2AB2A1E559C003E40B9 /* LanguagePickerView.swift */; };
+		AE67665E2A24CE9800B7F93E /* RecentsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE67665D2A24CE9800B7F93E /* RecentsCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		8925BE962A1CF11C00118B93 /* TranslationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationAPI.swift; sourceTree = "<group>"; };
 		8925BE982A1CF19D00118B93 /* TranslationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationManager.swift; sourceTree = "<group>"; };
 		AE2FD2AB2A1E559C003E40B9 /* LanguagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerView.swift; sourceTree = "<group>"; };
+		AE67665D2A24CE9800B7F93E /* RecentsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		8925BE952A1CEDC300118B93 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AE67665D2A24CE9800B7F93E /* RecentsCardView.swift */,
 				3F820D172A1B9F20009A1E9E /* TranslationView.swift */,
 				AE2FD2AB2A1E559C003E40B9 /* LanguagePickerView.swift */,
 				3FEA4CD62A1FA25D001A9850 /* TabBarView.swift */,
@@ -201,6 +204,7 @@
 				3F820D162A1B9F20009A1E9E /* translateStudyApp.swift in Sources */,
 				AE2FD2AC2A1E559C003E40B9 /* LanguagePickerView.swift in Sources */,
 				3FEA4CDD2A1FA3B2001A9850 /* ConversationView.swift in Sources */,
+				AE67665E2A24CE9800B7F93E /* RecentsCardView.swift in Sources */,
 				3B31539D2A20F6260012851F /* Recents.swift in Sources */,
 				3FEA4CE02A1FA3CB001A9850 /* FavoritesView.swift in Sources */,
 			);
