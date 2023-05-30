@@ -19,8 +19,6 @@ struct TranslationView: View {
     @State var textInput: String = ""
     @State var textInputed: String = ""
     @State var textOutput: String = ""
-    @State var selectedSourceLanguage = TranslationLanguage(code: "pt", name: "Portuguese")
-    @State var selectedTargetLanguage = TranslationLanguage(code: "en", name: "English")
     @State private var textInputIsFocused: Bool = false
 
     @State var translationHappened: Bool = false
@@ -57,9 +55,9 @@ struct TranslationView: View {
                     // language pickers
                     HStack{
 
-                        LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, pickerLanguage: $selectedSourceLanguage, languageType: LanguageType.source, selectedLanguage: $selectedLanguage)
+                        LanguagePickerView(languageType: LanguageType.source, selectedLanguage: $selectedLanguage)
                         
-                        LanguagePickerView(supportedLanguages: translationManager.supportedLanguages, pickerLanguage: $selectedTargetLanguage, languageType: LanguageType.target, selectedLanguage: $selectedLanguage)
+                        LanguagePickerView(languageType: LanguageType.target, selectedLanguage: $selectedLanguage)
                         
                     }
                     .padding(.top)
@@ -77,12 +75,17 @@ struct TranslationView: View {
                                     // translation texts
                                     VStack(alignment: .leading, spacing: 0) {
                                         if translationHappened {
-                                            Text(selectedSourceLanguage.name!)
-                                                .foregroundColor(.black)
-                                                .font(.caption2)
-                                                .bold()
-                                                .padding(.leading)
-                                                .padding(.top)
+                                           
+                                            if let languageName = translationManager.sourceLanguage.name{
+                                                Text(languageName)
+                                                    .foregroundColor(.black)
+                                                    .font(.caption2)
+                                                    .bold()
+                                                    .padding(.leading)
+                                                    .padding(.top)
+                                            }
+                                            
+                                            
                                         }
                                         
                                         if textInputIsFocused {
@@ -141,11 +144,16 @@ struct TranslationView: View {
                                             Divider()
                                                 .padding()
                                             
-                                            Text(selectedTargetLanguage.name!)
-                                                .font(.caption2)
-                                                .bold()
-                                                .padding(.leading)
-                                                .foregroundColor(.teal)
+
+                                            if let languageName = translationManager.targetLanguage.name{
+                                                Text(languageName)
+                                                    .font(.caption2)
+                                                    .bold()
+                                                    .padding(.leading)
+                                                    .foregroundColor(.teal)
+                                            }
+                                            
+                                            
                                             
                                             Text(textOutput)
                                                 .font(.title2)
@@ -173,12 +181,17 @@ struct TranslationView: View {
                                     ZStack {
                                         // translation texts
                                         VStack(alignment: .leading, spacing: 0) {
-                                            Text(selectedSourceLanguage.name!)
-                                                .foregroundColor(.black)
-                                                .font(.caption2)
-                                                .bold()
-                                                .padding(.leading)
-                                                .padding(.top)
+                                            
+                                            
+                                            if let languageName = translationManager.sourceLanguage.name{
+                                                Text(languageName)
+                                                    .foregroundColor(.black)
+                                                    .font(.caption2)
+                                                    .bold()
+                                                    .padding(.leading)
+                                                    .padding(.top)
+                                            }
+                                            
                                             
                                             Text(textInputed)
                                                 .foregroundColor(.black)
@@ -210,11 +223,17 @@ struct TranslationView: View {
                                             Divider()
                                                 .padding()
                                             
-                                            Text(selectedTargetLanguage.name!)
-                                                .font(.caption2)
-                                                .bold()
-                                                .padding(.leading)
-                                                .foregroundColor(.teal)
+                                            
+                                            if let languageName = translationManager.targetLanguage.name{
+                                                Text(languageName)
+                                                    .font(.caption2)
+                                                    .bold()
+                                                    .padding(.leading)
+                                                    .foregroundColor(.teal)
+                                            }
+                                            
+                                            
+                                            
                                             
                                             Text(textOutput)
                                                 .font(.title2)
@@ -343,6 +362,9 @@ struct TranslationView: View {
                 }
                 .padding(.bottom)
             }
+        }
+        .task{
+            await translationManager.setup()
         }
     }
     
