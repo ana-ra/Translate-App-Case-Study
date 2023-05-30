@@ -172,7 +172,7 @@ class TranslationManager: ObservableObject {
     
     
     func translate(completion: @escaping (_ translations: String?) -> Void) {
-        guard let textToTranslate = textToTranslate, let targetLanguage = targetLanguageCode else { completion(nil); return }
+        guard let textToTranslate = textToTranslate, let targetLanguage = targetLanguage.code else { completion(nil); return }
         
         var urlParams = [String: String]()
         urlParams["key"] = apiKey
@@ -180,7 +180,7 @@ class TranslationManager: ObservableObject {
         urlParams["target"] = targetLanguage
         urlParams["format"] = "text"
         
-        if let sourceLanguage = sourceLanguageCode {
+        if let sourceLanguage = sourceLanguage.code {
             urlParams["source"] = sourceLanguage
         }
         
