@@ -30,6 +30,7 @@ struct TranslationView: View {
     
     @State var recording: Bool = false
     
+    
     var body: some View {
         
         ZStack {
@@ -87,6 +88,7 @@ struct TranslationView: View {
                                         if textInputIsFocused {
                                             HStack {
                                                 Spacer()
+                                                // X button
                                                 Image(systemName: "xmark.circle.fill")
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fit)
@@ -97,13 +99,16 @@ struct TranslationView: View {
                                                         withAnimation(.spring()) {
                                                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                                                             textInputIsFocused = false
+                                                            speechRecognizer.stopTranscribing()
+                                                            recording = false
+                                                            
                                                         }
                                                         
                                                     }
                                             }
                                         }
                                         
-                                        TextField("Enter text", text: $textInput)
+                                        TextField(recording ? "Listening..." : "Enter text", text: $textInput)
                                             .foregroundColor(.black)
                                             .padding(.leading)
                                             .font(.title2)
@@ -149,6 +154,8 @@ struct TranslationView: View {
                                                 .padding(.top, 2)
                                                 .foregroundColor(.teal)
                                         }
+                                        
+                                        
                                         Spacer()
                                         
                                     }
@@ -235,6 +242,7 @@ struct TranslationView: View {
                                     if textInputIsFocused {
                                         HStack {
                                             Spacer()
+                                            // X button
                                             Image(systemName: "xmark.circle.fill")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
@@ -246,13 +254,15 @@ struct TranslationView: View {
                                                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                                                         textInputIsFocused = false
                                                         textInput = ""
+                                                        speechRecognizer.stopTranscribing()
+                                                        recording = false
                                                     }
                                                     
                                                 }
                                         }
                                     }
                                     
-                                    TextField("Enter text", text: $textInput)
+                                    TextField(recording ? "Listening..." : "Enter text", text: $textInput)
                                         .foregroundColor(.black)
                                         .padding(.leading)
                                         .font(.title2)
@@ -291,14 +301,19 @@ struct TranslationView: View {
                 }
                 .padding(.top, 16)
                 
-                // microphone button
+                // microphone button and recording waves
                 VStack {
                     Spacer()
-                    Image(systemName: "mic.circle.fill")
+                    if recording {
+                        WaveView()
+                            .padding(.bottom)
+                    }
+                    
+                    Image(systemName: recording ? "mic.circle" : "mic.circle.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 55)
-                        .foregroundColor(recording ? .red : .teal)
+                        .foregroundColor(.teal)
                         .onTapGesture {
                             if !recording {
                                 speechRecognizer.resetTranscript()
@@ -324,9 +339,10 @@ struct TranslationView: View {
                                 }
                             }
                         }
-                }.padding()
+                        
+                }
+                .padding(.bottom)
             }
-            
         }
     }
     
