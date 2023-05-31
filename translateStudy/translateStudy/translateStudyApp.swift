@@ -15,7 +15,6 @@ struct translateStudyApp: App {
         WindowGroup {
             TabBarView()
                 .environmentObject(translationManager)
-
         }
     }
 }

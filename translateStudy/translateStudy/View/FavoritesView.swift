@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FavoritesView: View {
     @State var favoritesEmpty = false
+    @FetchRequest(sortDescriptors: []) var translations: FetchedResults<Translation>
     
     var body: some View {
         ZStack {
@@ -59,7 +60,10 @@ struct FavoritesView: View {
                             .padding(.bottom)
                             .padding(.leading)
                         
-                        RecentsCardView(sourceLanguage: TranslationLanguage(code: "en", name: "English"), targetLanguage: TranslationLanguage(code: "pt", name: "Português"), sourceText: "oi", translatedText: "hi")
+                        List(translations) { translation in
+                            RecentsCardView(sourceLanguage: translation.sourceLanguage ?? "Unknown", targetLanguage: translation.targetLanguage ?? "Unknown", sourceText: translation.textInput ?? "Unknown", translatedText: translation.textOutput ?? "Unknown")
+                        }
+
                     }
                     
                 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3B31539B2A20F2480012851F /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B31539A2A20F2480012851F /* SpeechRecognizer.swift */; };
 		3B31539D2A20F6260012851F /* Recents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B31539C2A20F6260012851F /* Recents.swift */; };
+		3B8ED0702A276F4900FC3D1D /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B8ED06E2A276F4900FC3D1D /* DataModel.xcdatamodeld */; };
+		3B8ED0722A27702400FC3D1D /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8ED0712A27702400FC3D1D /* DataController.swift */; };
 		3F820D162A1B9F20009A1E9E /* translateStudyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F820D152A1B9F20009A1E9E /* translateStudyApp.swift */; };
 		3F820D182A1B9F20009A1E9E /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F820D172A1B9F20009A1E9E /* TranslationView.swift */; };
 		3F820D1A2A1B9F21009A1E9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F820D192A1B9F21009A1E9E /* Assets.xcassets */; };
@@ -26,6 +28,8 @@
 /* Begin PBXFileReference section */
 		3B31539A2A20F2480012851F /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		3B31539C2A20F6260012851F /* Recents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recents.swift; sourceTree = "<group>"; };
+		3B8ED06F2A276F4900FC3D1D /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		3B8ED0712A27702400FC3D1D /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		3F820D122A1B9F20009A1E9E /* translateStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = translateStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F820D152A1B9F20009A1E9E /* translateStudyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = translateStudyApp.swift; sourceTree = "<group>"; };
 		3F820D172A1B9F20009A1E9E /* TranslationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationView.swift; sourceTree = "<group>"; };
@@ -87,6 +91,8 @@
 				AE67665D2A24CE9800B7F93E /* RecentsCardView.swift */,
 				3F820D172A1B9F20009A1E9E /* TranslationView.swift */,
 				AE2FD2AB2A1E559C003E40B9 /* LanguagePickerView.swift */,
+				3B8ED06E2A276F4900FC3D1D /* DataModel.xcdatamodeld */,
+				3B8ED0712A27702400FC3D1D /* DataController.swift */,
 				3FEA4CD62A1FA25D001A9850 /* TabBarView.swift */,
 				3FEA4CDA2A1FA3A2001A9850 /* CameraView.swift */,
 				3FEA4CDC2A1FA3B2001A9850 /* ConversationView.swift */,
@@ -189,12 +195,14 @@
 				3FEA4CD72A1FA25D001A9850 /* TabBarView.swift in Sources */,
 				3FEA4CDB2A1FA3A2001A9850 /* CameraView.swift in Sources */,
 				3F820D182A1B9F20009A1E9E /* TranslationView.swift in Sources */,
+				3B8ED0702A276F4900FC3D1D /* DataModel.xcdatamodeld in Sources */,
 				3B31539B2A20F2480012851F /* SpeechRecognizer.swift in Sources */,
 				8925BE992A1CF19D00118B93 /* TranslationManager.swift in Sources */,
 				8925BE972A1CF11C00118B93 /* TranslationAPI.swift in Sources */,
 				3F820D162A1B9F20009A1E9E /* translateStudyApp.swift in Sources */,
 				AE2FD2AC2A1E559C003E40B9 /* LanguagePickerView.swift in Sources */,
 				3FEA4CDD2A1FA3B2001A9850 /* ConversationView.swift in Sources */,
+				3B8ED0722A27702400FC3D1D /* DataController.swift in Sources */,
 				AEED9A422A2621BD0035DD87 /* WaveAnimation.swift in Sources */,
 				AE67665E2A24CE9800B7F93E /* RecentsCardView.swift in Sources */,
 				3B31539D2A20F6260012851F /* Recents.swift in Sources */,
@@ -403,6 +411,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3B8ED06E2A276F4900FC3D1D /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3B8ED06F2A276F4900FC3D1D /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 3B8ED06F2A276F4900FC3D1D /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3F820D0A2A1B9F20009A1E9E /* Project object */;
 }
