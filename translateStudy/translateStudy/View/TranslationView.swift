@@ -59,8 +59,14 @@ struct TranslationView: View {
                     HStack{
 
                         LanguagePickerView(languageType: LanguageType.source, selectedLanguage: $selectedLanguage)
-                        
+                            .onChange(of: translationManager.sourceLanguage, perform: { newLanguage in
+                                speechRecognizer.setLocale(newLanguage.code)
+                            })
+
                         LanguagePickerView(languageType: LanguageType.target, selectedLanguage: $selectedLanguage)
+                            .onChange(of: translationManager.sourceLanguage, perform: { newLanguage in
+                                speechRecognizer.setLocale(newLanguage.code)
+                            })
                         
                     }
                     .padding(.top)
