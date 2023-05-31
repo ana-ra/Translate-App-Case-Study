@@ -28,6 +28,9 @@ struct TranslationView: View {
     
     @State var recording: Bool = false
     
+    @Environment(\.managedObjectContext) var moc
+    
+    
     
     var body: some View {
         
@@ -127,6 +130,9 @@ struct TranslationView: View {
                                                 if textInput != "" {
                                                     textInputed = textInput
                                                     translate()
+                                                    
+                                                    saveTranslation()
+                                                    
                                                     withAnimation(.spring()) {
                                                         translationHappened = true
                                                         textInputIsFocused = false
@@ -208,6 +214,10 @@ struct TranslationView: View {
                                                     translationManager.textToTranslate = textInput
                                                     if textInput != "" {
                                                         translate()
+                                                        
+                                                        saveTranslation()
+                                                        
+                                                        
                                                         withAnimation(.spring()) {
                                                             translationHappened = true
                                                             textInputIsFocused = false
@@ -297,6 +307,9 @@ struct TranslationView: View {
                                             if textInput != "" {
                                                 textInputed = textInput
                                                 translate()
+                                                
+                                                saveTranslation()
+                                                
                                                 withAnimation(.spring()) {
                                                     translationHappened = true
                                                     textInputIsFocused = false
@@ -350,6 +363,10 @@ struct TranslationView: View {
                                     withAnimation(.spring()) {
                                         translationManager.textToTranslate = textInput
                                         translate()
+                                        
+                                        saveTranslation()
+                                        
+                                        
                                         translationHappened = true
                                         textInputed = textInput
                                         textInput = ""
@@ -377,6 +394,18 @@ struct TranslationView: View {
             }
             
         })
+    }
+    
+    func saveTranslation() {
+        //Handling Core Data
+        let translationData = Translation(context: moc)
+        translationData.sourceLanguage = translationManager.sourceLanguage.name
+        translationData.targetLanguage = translationManager.targetLanguage.name
+        translationData.textInput = textInput
+        translationData.textOutput = textOutput
+        translationData.id = UUID()
+        
+        try? moc.save()
     }
 }
 

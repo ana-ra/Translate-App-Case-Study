@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct RecentsCardView: View {
-    var sourceLanguage: TranslationLanguage
-    var targetLanguage: TranslationLanguage
+    var sourceLanguage: String
+    var targetLanguage: String
     var sourceText: String
     var translatedText: String
     @State var cardOpen: Bool = false
@@ -19,7 +19,7 @@ struct RecentsCardView: View {
         if !cardOpen {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(sourceLanguage.name!)
+                    Text(sourceLanguage)
                         .font(.callout)
                         .fontWeight(.medium)
                     
@@ -30,7 +30,7 @@ struct RecentsCardView: View {
                     
                     
                     
-                    Text(targetLanguage.name!)
+                    Text(targetLanguage)
                         .font(.callout)
                         .fontWeight(.medium)
                         .foregroundColor(.teal)
@@ -59,7 +59,7 @@ struct RecentsCardView: View {
             HStack {
                 // translation texts
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(sourceLanguage.name!)
+                    Text(sourceLanguage)
                         .foregroundColor(.black)
                         .font(.caption2)
                         .bold()
@@ -75,7 +75,7 @@ struct RecentsCardView: View {
                     Divider()
                         .padding()
                     
-                    Text(targetLanguage.name!)
+                    Text(targetLanguage)
                         .font(.caption2)
                         .bold()
                         .padding(.leading)
@@ -123,8 +123,8 @@ struct RecentsCardView: View {
     }
 }
 
-struct RecentsCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecentsCardView(sourceLanguage: TranslationLanguage(code: "en", name: "English"), targetLanguage: TranslationLanguage(code: "pt", name: "Português"), sourceText: "oi", translatedText: "hi")
-    }
-}
+//struct RecentsCardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RecentsCardView(sourceLanguage: TranslationLanguage(code: "en", name: "English"), targetLanguage: TranslationLanguage(code: "pt", name: "Português"), sourceText: "oi", translatedText: "hi")
+//    }
+//}
