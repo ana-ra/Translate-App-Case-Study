@@ -13,36 +13,47 @@ struct TranslationLanguage: Hashable {
     var name: String?
 }
 
-class TranslationManager: NSObject, ObservableObject {
+class TranslationManager: ObservableObject {
     
     private let apiKey = "AIzaSyAyv1YIX915PD7lwDuOz8gacjsIWxQeLJw"
-    
-    var sourceLanguageCode: String?
     
     @Published var supportedLanguages = [TranslationLanguage]()
  
     var textToTranslate: String?
     
-    var targetLanguageCode: String?
+    @Published var sourceLanguage: TranslationLanguage = .init(code: "", name: "")
     
-    @Published var fetched = false
-    
-    override init() {
-        super.init()
-        self.fetchSupportedLanguages(completion: { (success) in
+    @Published var targetLanguage: TranslationLanguage = .init(code: "", name: "")
+
+    @MainActor
+    func setup() async {
+        fetchSupportedLanguages(completion: { (success) in
             
             // Check if supported languages were fetched successfully or not.
             if success {
                 // Display languages in the tableview.
-                self.fetched = true
+                DispatchQueue.main.async {
+                    self.sourceLanguage = self.getLanguage("pt")
+                    self.targetLanguage = self.getLanguage("en")
+                }
+                
             } else {
                 // Show an alert saying that something went wrong.
                 fatalError("couldn't fetch languages")
             }
-            
         })
-        sourceLanguageCode = "pt"
-        targetLanguageCode = "en"
+    }
+    
+    func getLanguage(_ code: String?) -> TranslationLanguage {
+        if supportedLanguages.count == 0{
+            fatalError("Supported Languages not fetched")
+        }
+        for language in self.supportedLanguages {
+            if code == language.code {
+                return language
+            }
+        }
+        fatalError("Couldn't find desired language")
     }
     
     private func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], completion: @escaping (_ results: [String: Any]?) -> Void) {
@@ -107,7 +118,7 @@ class TranslationManager: NSObject, ObservableObject {
                 }
                 
                 if detectedLanguages.count > 0 {
-                    self.sourceLanguageCode = detectedLanguages[0]
+                    self.sourceLanguage = self.getLanguage(detectedLanguages[0])
                     completion(detectedLanguages[0])
                 } else {
                     completion(nil)
@@ -141,7 +152,9 @@ class TranslationManager: NSObject, ObservableObject {
                         languageName = name
                     }
                     
-                    self.supportedLanguages.append(TranslationLanguage(code: languageCode, name: languageName))
+                    DispatchQueue.main.async {
+                        self.supportedLanguages.append(TranslationLanguage(code: languageCode, name: languageName))
+                    }
                 }
                 
                 completion(true)
@@ -155,7 +168,7 @@ class TranslationManager: NSObject, ObservableObject {
     
     
     func translate(completion: @escaping (_ translations: String?) -> Void) {
-        guard let textToTranslate = textToTranslate, let targetLanguage = targetLanguageCode else { completion(nil); return }
+        guard let textToTranslate = textToTranslate, let targetLanguage = targetLanguage.code else { completion(nil); return }
         
         var urlParams = [String: String]()
         urlParams["key"] = apiKey
@@ -163,7 +176,7 @@ class TranslationManager: NSObject, ObservableObject {
         urlParams["target"] = targetLanguage
         urlParams["format"] = "text"
         
-        if let sourceLanguage = sourceLanguageCode {
+        if let sourceLanguage = sourceLanguage.code {
             urlParams["source"] = sourceLanguage
         }
         

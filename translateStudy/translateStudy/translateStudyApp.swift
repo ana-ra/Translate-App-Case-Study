@@ -11,11 +11,12 @@ import Foundation
 @main
 struct translateStudyApp: App {
     @StateObject private var translationManager = TranslationManager()
+    @StateObject private var dataController = DataController()
     var body: some Scene {
         WindowGroup {
             TabBarView()
                 .environmentObject(translationManager)
-
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }
