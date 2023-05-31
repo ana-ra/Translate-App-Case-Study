@@ -26,6 +26,7 @@ extension View {
 
 struct LanguagePickerView: View {
     @EnvironmentObject var translationManager: TranslationManager
+//    @EnvironmentObject var speechRecognizer: SpeechRecognizer
     var languageType: LanguageType
     @Binding var selectedLanguage: LanguageType
     
@@ -89,9 +90,6 @@ struct LanguagePickerView: View {
                                     Text(languageName).tag(String?.none)
                                 }
                             }
-                        }
-                        .onChange(of: translationManager.sourceLanguage) { newValue in
-                            print(newValue)
                         }
                     }
                     

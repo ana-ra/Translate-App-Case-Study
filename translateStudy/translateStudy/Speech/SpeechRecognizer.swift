@@ -15,7 +15,7 @@ import Speech
 import SwiftUI
 
 /// A helper for transcribing speech to text using SFSpeechRecognizer and AVAudioEngine.
-actor SpeechRecognizer: ObservableObject {
+class SpeechRecognizer: ObservableObject {
     enum RecognizerError: Error {
         case nilRecognizer
         case notAuthorizedToRecognize
@@ -37,7 +37,7 @@ actor SpeechRecognizer: ObservableObject {
     private var audioEngine: AVAudioEngine?
     private var request: SFSpeechAudioBufferRecognitionRequest?
     private var task: SFSpeechRecognitionTask?
-    private let recognizer: SFSpeechRecognizer?
+    private var recognizer: SFSpeechRecognizer?
     
     /**
      Initializes a new speech recognizer. If this is the first time you've used the class, it
@@ -64,22 +64,22 @@ actor SpeechRecognizer: ObservableObject {
         }
     }
     
-    @MainActor func startTranscribing() {
-        Task {
-            await transcribe()
+    func setLocale(_ code: String?) {
+        if let languageCode = code {
+            recognizer = SFSpeechRecognizer(locale: Locale(identifier: languageCode))
         }
     }
     
-    @MainActor func resetTranscript() {
-        Task {
-            await reset()
-        }
+    func startTranscribing() {
+        transcribe()
     }
     
-    @MainActor func stopTranscribing() {
-        Task {
-            await reset()
-        }
+    func resetTranscript() {
+        reset()
+    }
+    
+    func stopTranscribing() {
+        reset()
     }
     
     /**
