@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    @State var favoritesEmpty = false
     @FetchRequest(sortDescriptors: []) var translations: FetchedResults<Translation>
     
     var body: some View {
@@ -28,7 +27,7 @@ struct FavoritesView: View {
                 .padding(.top, 16)
                 .padding(.leading)
                 
-                if favoritesEmpty {
+                if translations.count == 0 {
                     Spacer()
                     VStack{
                         Image(systemName: "star.fill")
@@ -37,9 +36,6 @@ struct FavoritesView: View {
                             .frame(width: 55, height: 55)
                             .padding(.bottom, 8)
                             .foregroundColor(.gray)
-                            .onTapGesture {
-                                favoritesEmpty = false
-                            }
                         
                         
                         Text("No Favorites")
@@ -60,9 +56,13 @@ struct FavoritesView: View {
                             .padding(.bottom)
                             .padding(.leading)
                         
-                        List(translations) { translation in
-                            RecentsCardView(sourceLanguage: translation.sourceLanguage ?? "Unknown", targetLanguage: translation.targetLanguage ?? "Unknown", sourceText: translation.textInput ?? "Unknown", translatedText: translation.textOutput ?? "Unknown")
+                        ScrollView(.vertical) {
+                            ForEach(translations) { translation in
+                                RecentsCardView(sourceLanguage: translation.sourceLanguage ?? "Unknown", targetLanguage: translation.targetLanguage ?? "Unknown", sourceText: translation.textInput ?? "Unknown", translatedText: translation.textOutput ?? "Unknown")
+                            }
+                            .padding(.horizontal)
                         }
+                        
 
                     }
                     
