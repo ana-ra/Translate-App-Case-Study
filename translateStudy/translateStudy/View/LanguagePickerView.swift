@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct RoundedCorner: Shape {
-
+    
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
@@ -25,72 +25,76 @@ extension View {
 }
 
 struct LanguagePickerView: View {
-    var supportedLanguages: [TranslationLanguage]
-    @Binding var pickerLanguage: TranslationLanguage
+    @EnvironmentObject var translationManager: TranslationManager
     var languageType: LanguageType
     @Binding var selectedLanguage: LanguageType
     
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
-        .foregroundColor(.white)
-        .frame(height: 50)
-        .overlay {
-            HStack {
-                // button with language name
-                Button {
-                    withAnimation(.spring()) {
-                        selectedLanguage = languageType
+            .foregroundColor(.white)
+            .frame(height: 50)
+            .overlay {
+                HStack {
+                    // button with language name
+                    Button {
+                        withAnimation(.spring()) {
+                            selectedLanguage = languageType
+                        }
+                        
+                    } label: {
+                        HStack {
+                            if selectedLanguage == languageType {
+                                Image(systemName: "smallcircle.filled.circle.fill")
+                                    .foregroundStyle(.teal, .teal.opacity(0.5))
+                                    .font(.subheadline)
+                                    .padding(.leading)
+                            } else {
+                                Image(systemName: "smallcircle.filled.circle.fill")
+                                    .foregroundColor(.white)
+                                    .font(.subheadline)
+                                    .padding(.leading)
+                            }
+                            
+                            
+                            VStack(alignment: .leading) {
+                              
+                                if let languageName = (languageType == .source ? translationManager.sourceLanguage.name : translationManager.targetLanguage.name){
+                                    Text(languageName)
+                                        .foregroundColor(.black)
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                }
+                                
+                                //                            Text("US")
+                                //                                .foregroundColor(.gray)
+                                //                                .font(.footnote)
+                            }
+                            
+                            Spacer()
+                        }
+                    }
+                    .padding(.trailing, 0)
+                    
+                    // divider
+                    Rectangle()
+                        .foregroundColor(Color(.systemGray6))
+                        .padding(.vertical, 0)
+                        .frame(width: 2)
+                    
+                    // picker button
+                    Menu {
+                        Picker(selection: (languageType == .source ? $translationManager.sourceLanguage : $translationManager.targetLanguage), label: Text("")) {
+                            ForEach(translationManager.supportedLanguages, id: \.self) { language in // 4
+                                if let languageName = language.name {
+                                    Text(languageName).tag(String?.none)
+                                }
+                            }
+                        }
+                        .onChange(of: translationManager.sourceLanguage) { newValue in
+                            print(newValue)
+                        }
                     }
                     
-                } label: {
-                    HStack {
-                        if selectedLanguage == languageType {
-                            Image(systemName: "smallcircle.filled.circle.fill")
-                                .foregroundStyle(.teal, .teal.opacity(0.5))
-                                .font(.subheadline)
-                                .padding(.leading)
-                        } else {
-                            Image(systemName: "smallcircle.filled.circle.fill")
-                                .foregroundColor(.white)
-                                .font(.subheadline)
-                                .padding(.leading)
-                        }
-                        
-                        
-                        VStack(alignment: .leading) {
-                            if let languageName = pickerLanguage.name {
-                                Text(languageName)
-                                    .foregroundColor(.black)
-                                    .font(.subheadline)
-                                    .fontWeight(.medium)
-                            }
-//                            Text("US")
-//                                .foregroundColor(.gray)
-//                                .font(.footnote)
-                        }
-                        
-                        Spacer()
-                    }
-                }
-                .padding(.trailing, 0)
-                
-                // divider
-                Rectangle()
-                    .foregroundColor(Color(.systemGray6))
-                    .padding(.vertical, 0)
-                    .frame(width: 2)
-                
-                // picker button
-                Menu {
-                    Picker(selection: $pickerLanguage, label: Text("")) {
-                        ForEach(supportedLanguages, id: \.self) { language in // 4
-                            if let languageName = language.name {
-                                Text(languageName)
-                            }
-                        }
-                    }
-                }
-
                 label: {
                     Label("", systemImage: "chevron.down")
                         .foregroundColor(.cyan)
@@ -100,5 +104,6 @@ struct LanguagePickerView: View {
                 }
             }
     }
+    
     
 }
