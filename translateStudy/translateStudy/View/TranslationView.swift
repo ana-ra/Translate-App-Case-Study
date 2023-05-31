@@ -48,12 +48,25 @@ struct TranslationView: View {
                 // page content
                 VStack(alignment: .leading, spacing: 0) {
                     
-                    // page title
-                    Text("Translation")
-                        .font(.largeTitle)
-                        .bold()
-                        .padding(.top)
-                        .padding(.leading)
+                    // page title and ... button
+                    HStack(alignment: .bottom) {
+                        Text("Translation")
+                            .font(.largeTitle)
+                            .bold()
+                            .padding(.top)
+                            .padding(.leading)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "ellipsis.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 24)
+                            .foregroundColor(.teal)
+                            .padding(.trailing)
+                            .padding(.bottom, 8)
+                    }
+                    
                     
                     // language pickers
                     HStack{
