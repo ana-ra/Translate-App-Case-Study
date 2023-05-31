@@ -21,10 +21,8 @@ class TranslationManager: ObservableObject {
  
     var textToTranslate: String?
     
-    @Published var sourceLanguageCode: String?
     @Published var sourceLanguage: TranslationLanguage = .init(code: "", name: "")
     
-    @Published var targetLanguageCode: String?
     @Published var targetLanguage: TranslationLanguage = .init(code: "", name: "")
 
     @MainActor
@@ -35,8 +33,6 @@ class TranslationManager: ObservableObject {
             if success {
                 // Display languages in the tableview.
                 DispatchQueue.main.async {
-                    self.sourceLanguageCode = "pt"
-                    self.targetLanguageCode = "en"
                     self.sourceLanguage = self.getLanguage("pt")
                     self.targetLanguage = self.getLanguage("en")
                 }
@@ -122,7 +118,7 @@ class TranslationManager: ObservableObject {
                 }
                 
                 if detectedLanguages.count > 0 {
-                    self.sourceLanguageCode = detectedLanguages[0]
+                    self.sourceLanguage = self.getLanguage(detectedLanguages[0])
                     completion(detectedLanguages[0])
                 } else {
                     completion(nil)
