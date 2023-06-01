@@ -56,6 +56,12 @@ class TranslationManager: ObservableObject {
         fatalError("Couldn't find desired language")
     }
     
+    func swapLanguages() {
+        let tempLanguage = sourceLanguage
+        sourceLanguage = targetLanguage
+        targetLanguage = tempLanguage
+    }
+    
     private func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], completion: @escaping (_ results: [String: Any]?) -> Void) {
         if var components = URLComponents(string: api.getURL()) {
             components.queryItems = [URLQueryItem]()

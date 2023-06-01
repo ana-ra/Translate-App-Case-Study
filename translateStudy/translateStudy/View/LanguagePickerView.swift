@@ -27,8 +27,7 @@ extension View {
 struct LanguagePickerView: View {
     @EnvironmentObject var translationManager: TranslationManager
 //    @EnvironmentObject var speechRecognizer: SpeechRecognizer
-    var languageType: LanguageType
-    @Binding var selectedLanguage: LanguageType
+
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -60,7 +59,7 @@ struct LanguagePickerView: View {
                             
                             VStack(alignment: .leading) {
                               
-                                if let languageName = (languageType == .source ? translationManager.sourceLanguage.name : translationManager.targetLanguage.name){
+                                if let languageName = ((pickerID == selectedLanguage) || (pickerID == 0 && selectedLanguage == -1) ? translationManager.sourceLanguage.name : translationManager.targetLanguage.name){
                                     Text(languageName)
                                         .foregroundColor(Color(colorScheme == .dark ? .white : .black))
                                         .font(.subheadline)
@@ -82,7 +81,7 @@ struct LanguagePickerView: View {
                     
                     // picker button
                     Menu {
-                        Picker(selection: (languageType == .source ? $translationManager.sourceLanguage : $translationManager.targetLanguage), label: Text("")) {
+                        Picker(selection: ((pickerID == selectedLanguage) || (pickerID == 0 && selectedLanguage == -1) ? $translationManager.sourceLanguage : $translationManager.targetLanguage), label: Text("")) {
                             ForEach(translationManager.supportedLanguages, id: \.self) { language in // 4
                                 if let languageName = language.name {
                                     Text(languageName).tag(String?.none)

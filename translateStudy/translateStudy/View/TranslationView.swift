@@ -22,7 +22,7 @@ struct TranslationView: View {
     @State private var textInputIsFocused: Bool = false
 
     @State var translationHappened: Bool = false
-    @State var selectedLanguage: LanguageType = LanguageType.none
+    @State var selectedLanguage = -1
     
     @StateObject var speechRecognizer = SpeechRecognizer()
     
@@ -71,12 +71,12 @@ struct TranslationView: View {
                     // language pickers
                     HStack{
 
-                        LanguagePickerView(languageType: LanguageType.source, selectedLanguage: $selectedLanguage)
+                        LanguagePickerView(pickerID: 0, selectedLanguage: $selectedLanguage)
                             .onChange(of: translationManager.sourceLanguage, perform: { newLanguage in
                                 speechRecognizer.setLocale(newLanguage.code)
                             })
 
-                        LanguagePickerView(languageType: LanguageType.target, selectedLanguage: $selectedLanguage)
+                        LanguagePickerView(pickerID: 1, selectedLanguage: $selectedLanguage)
                             .onChange(of: translationManager.sourceLanguage, perform: { newLanguage in
                                 speechRecognizer.setLocale(newLanguage.code)
                             })
@@ -139,7 +139,6 @@ struct TranslationView: View {
                                         .onTapGesture {
                                             withAnimation(.spring()) {
                                                 textInputIsFocused = true
-                                                selectedLanguage = LanguageType.source
                                             }
                                         }
                                         .onSubmit {
@@ -275,7 +274,7 @@ struct TranslationView: View {
                                                 withAnimation(.spring()) {
                                                     textInputIsFocused = true
                                                     textInput = textInputed
-                                                    selectedLanguage = LanguageType.source
+
                                                 }
                                             }
                                             .onSubmit {
@@ -370,7 +369,6 @@ struct TranslationView: View {
                                         .onTapGesture {
                                             withAnimation(.spring()) {
                                                 textInputIsFocused = true
-                                                selectedLanguage = LanguageType.source
                                             }
                                         }
                                         .onSubmit {
