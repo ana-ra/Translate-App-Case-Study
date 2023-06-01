@@ -58,7 +58,7 @@ struct FavoritesView: View {
                             .padding(.leading)
                         
                         ScrollView(.vertical) {
-                            ForEach(translations) { translation in
+                            ForEach(translations.reversed()) { translation in
                                 RecentsCardView(sourceLanguage: translation.sourceLanguage ?? "Unknown", targetLanguage: translation.targetLanguage ?? "Unknown", sourceText: translation.textInput ?? "Unknown", translatedText: translation.textOutput ?? "Unknown")
                             }
                         }
