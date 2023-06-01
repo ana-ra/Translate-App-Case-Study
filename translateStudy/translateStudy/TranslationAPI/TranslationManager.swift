@@ -21,6 +21,8 @@ class TranslationManager: ObservableObject {
  
     var textToTranslate: String?
     
+    @Published var setupDone = false
+    
     @Published var sourceLanguage: TranslationLanguage = .init(code: "", name: "")
     
     @Published var targetLanguage: TranslationLanguage = .init(code: "", name: "")
@@ -35,6 +37,7 @@ class TranslationManager: ObservableObject {
                 DispatchQueue.main.async {
                     self.sourceLanguage = self.getLanguage("pt")
                     self.targetLanguage = self.getLanguage("en")
+                    self.setupDone = true
                 }
                 
             } else {

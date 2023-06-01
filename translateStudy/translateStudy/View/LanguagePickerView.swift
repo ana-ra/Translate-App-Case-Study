@@ -41,7 +41,7 @@ struct LanguagePickerView: View {
                 HStack {
                     // button with language name
                     Button {
-                        if selectedLanguage != -1 {
+                        if selectedLanguage != -1 || pickerID == 1{
                             translationManager.swapLanguages()
                         }
                         selectedLanguage = pickerID

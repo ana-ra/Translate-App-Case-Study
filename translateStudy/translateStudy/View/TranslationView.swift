@@ -466,7 +466,9 @@ struct TranslationView: View {
             }
         }
         .task{
-            await translationManager.setup()
+            if !translationManager.setupDone{
+                await translationManager.setup()
+            }
         }
     }
     
