@@ -138,6 +138,9 @@ struct TranslationView: View {
                                         .bold()
                                         .onTapGesture {
                                             withAnimation(.spring()) {
+                                                if selectedLanguage == -1 {
+                                                    selectedLanguage = 0
+                                                }
                                                 textInputIsFocused = true
                                             }
                                         }
@@ -368,6 +371,9 @@ struct TranslationView: View {
                                         .padding()
                                         .onTapGesture {
                                             withAnimation(.spring()) {
+                                                if selectedLanguage == -1 {
+                                                    selectedLanguage = 0
+                                                }
                                                 textInputIsFocused = true
                                             }
                                         }
