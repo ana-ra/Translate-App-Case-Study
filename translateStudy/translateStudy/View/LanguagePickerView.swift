@@ -29,10 +29,11 @@ struct LanguagePickerView: View {
 //    @EnvironmentObject var speechRecognizer: SpeechRecognizer
     var languageType: LanguageType
     @Binding var selectedLanguage: LanguageType
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
-            .foregroundColor(.white)
+            .foregroundColor(colorScheme == .dark ? Color(.systemGray6) : .white)
             .frame(height: 50)
             .overlay {
                 HStack {
@@ -51,7 +52,7 @@ struct LanguagePickerView: View {
                                     .padding(.leading)
                             } else {
                                 Image(systemName: "smallcircle.filled.circle.fill")
-                                    .foregroundColor(.white)
+                                    .foregroundColor(colorScheme == .dark ? Color(.systemGray6) : .white)
                                     .font(.subheadline)
                                     .padding(.leading)
                             }
@@ -61,14 +62,10 @@ struct LanguagePickerView: View {
                               
                                 if let languageName = (languageType == .source ? translationManager.sourceLanguage.name : translationManager.targetLanguage.name){
                                     Text(languageName)
-                                        .foregroundColor(.black)
+                                        .foregroundColor(Color(colorScheme == .dark ? .white : .black))
                                         .font(.subheadline)
                                         .fontWeight(.medium)
                                 }
-                                
-                                //                            Text("US")
-                                //                                .foregroundColor(.gray)
-                                //                                .font(.footnote)
                             }
                             
                             Spacer()
@@ -78,6 +75,7 @@ struct LanguagePickerView: View {
                     
                     // divider
                     Rectangle()
+                        .foregroundColor(Color(colorScheme == .dark ? .systemGray3 : .systemGray6))
                         .foregroundColor(Color(.systemGray6))
                         .padding(.vertical, 0)
                         .frame(width: 2)

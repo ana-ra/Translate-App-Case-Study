@@ -13,19 +13,18 @@ struct RecentsCardView: View {
     var sourceText: String
     var translatedText: String
     @State var favorited: Bool = false
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
             HStack {
                 VStack(alignment: .leading) {
                     Text(sourceLanguage)
-                        .foregroundColor(.black)
                         .font(.caption2)
                         .bold()
                         .padding(.leading)
                         .padding(.top)
                     
                     Text(sourceText)
-                        .foregroundColor(.black)
                         .padding(.leading)
                         .font(.title2)
                         .bold()
@@ -34,14 +33,12 @@ struct RecentsCardView: View {
                         .padding()
                     
                     Text(targetLanguage)
-                        .foregroundColor(.black)
                         .font(.caption2)
                         .bold()
                         .padding(.leading)
                         .padding(.top)
                     
                     Text(translatedText)
-                        .foregroundColor(.black)
                         .padding(.leading)
                         .font(.title2)
                         .bold()
@@ -74,7 +71,7 @@ struct RecentsCardView: View {
                  
             }.background {
                 RoundedRectangle(cornerRadius: 8)
-                    .foregroundColor(.white)
+                    .foregroundColor(colorScheme == .dark ? Color(.systemGray6) : Color(.systemGray6))
             }
     }
 }

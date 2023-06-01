@@ -10,11 +10,13 @@ import SwiftUI
 struct FavoritesView: View {
     @FetchRequest(sortDescriptors: []) var translations: FetchedResults<Translation>
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         ZStack {
             // page background
             Rectangle()
-                .foregroundColor(Color(.systemGray6))
+                .foregroundColor(colorScheme == .dark ? .black : Color(.systemGray6))
                 .ignoresSafeArea()
             
             VStack() {
@@ -25,7 +27,6 @@ struct FavoritesView: View {
                     Spacer()
                 }
                 .padding(.top, 16)
-                .padding(.leading)
                 
                 if translations.count == 0 {
                     Spacer()
@@ -60,7 +61,6 @@ struct FavoritesView: View {
                             ForEach(translations) { translation in
                                 RecentsCardView(sourceLanguage: translation.sourceLanguage ?? "Unknown", targetLanguage: translation.targetLanguage ?? "Unknown", sourceText: translation.textInput ?? "Unknown", translatedText: translation.textOutput ?? "Unknown")
                             }
-                            .padding(.horizontal)
                         }
                         
 
@@ -71,6 +71,7 @@ struct FavoritesView: View {
 
                 
             }
+            .padding()
         }
     }
 }

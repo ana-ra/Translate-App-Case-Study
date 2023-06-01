@@ -30,6 +30,8 @@ struct TranslationView: View {
     
     @Environment(\.managedObjectContext) var moc
     
+    @Environment(\.colorScheme) var colorScheme
+    
     
     
     var body: some View {
@@ -38,11 +40,9 @@ struct TranslationView: View {
             VStack {
                 // page background
                 Rectangle()
-                    .foregroundColor(Color(.systemGray6))
-                    
-                Spacer()
+                    .foregroundColor(Color(colorScheme == .dark ? .black : .systemGray6))
             }
-            .ignoresSafeArea(.all, edges: .top)
+            .ignoresSafeArea(.all)
             
             ZStack {
                 // page content
@@ -58,7 +58,7 @@ struct TranslationView: View {
                         
                         Spacer()
                         
-                        Image(systemName: "ellipsis.circle.fill")
+                        Image(systemName: "ellipsis.circle")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 24)
@@ -89,204 +89,22 @@ struct TranslationView: View {
                     // translation card
                     if translationHappened == false {
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(.white)
-                            .overlay {
-                                ZStack {
-                                    
-                                    
-                                    // translation texts
-                                    VStack(alignment: .leading, spacing: 0) {
-                                        if translationHappened {
-                                           
-                                            if let languageName = translationManager.sourceLanguage.name{
-                                                Text(languageName)
-                                                    .foregroundColor(.black)
-                                                    .font(.caption2)
-                                                    .bold()
-                                                    .padding(.leading)
-                                                    .padding(.top)
-                                            }
-                                            
-                                            
-                                        }
-                                        
-                                        if textInputIsFocused {
-                                            HStack {
-                                                Spacer()
-                                                // X button
-                                                Image(systemName: "xmark.circle.fill")
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .frame(width: 28, height: 28)
-                                                    .symbolRenderingMode(.hierarchical)
-                                                    .foregroundColor(.secondary)
-                                                    .onTapGesture {
-                                                        withAnimation(.spring()) {
-                                                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                                                            textInputIsFocused = false
-                                                            speechRecognizer.stopTranscribing()
-                                                            recording = false
-                                                            
-                                                        }
-                                                        
-                                                    }
-                                            }
-                                        }
-                                        
-                                        TextField(recording ? "Listening..." : "Enter text", text: $textInput)
-                                            .foregroundColor(.black)
-                                            .padding(.leading)
-                                            .font(.title2)
-                                            .bold()
-                                            .onTapGesture {
-                                                withAnimation(.spring()) {
-                                                    textInputIsFocused = true
-                                                    selectedLanguage = LanguageType.source
-                                                }
-                                            }
-                                            .onSubmit {
-                                                translationManager.textToTranslate = textInput
-                                                if textInput != "" {
-                                                    textInputed = textInput
-                                                    translate()
-                                                    
-                                                    saveTranslation()
-                                                    
-                                                    withAnimation(.spring()) {
-                                                        translationHappened = true
-                                                        textInputIsFocused = false
-                                                        
-                                                    }
-                                                    textInput = ""
-                                                }
-                                                
-                                                
-                                            }
-                                            .textInputAutocapitalization(.never)
-                                            .disableAutocorrection(true)
-                                        
-                                        if translationHappened {
-                                            Divider()
-                                                .padding()
-                                            
-
-                                            if let languageName = translationManager.targetLanguage.name{
-                                                Text(languageName)
-                                                    .font(.caption2)
-                                                    .bold()
-                                                    .padding(.leading)
-                                                    .foregroundColor(.teal)
-                                            }
-                                            
-                                            
-                                            
-                                            Text(textOutput)
-                                                .font(.title2)
-                                                .bold()
-                                                .padding(.leading)
-                                                .padding(.top, 2)
-                                                .foregroundColor(.teal)
-                                        }
-                                        
-                                        
-                                        Spacer()
-                                        
-                                    }
-                                }
-                                .padding()
-                            }
-                            
-                            Spacer()
-                    } else {
-                        if !textInputIsFocused {
-                            // translated text card
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(.white)
-                                .overlay {
-                                    ZStack {
-                                        // translation texts
-                                        VStack(alignment: .leading, spacing: 0) {
-                                            
-                                            
-                                            if let languageName = translationManager.sourceLanguage.name{
-                                                Text(languageName)
-                                                    .foregroundColor(.black)
-                                                    .font(.caption2)
-                                                    .bold()
-                                                    .padding(.leading)
-                                                    .padding(.top)
-                                            }
-                                            
-                                            
-                                            Text(textInputed)
-                                                .foregroundColor(.black)
-                                                .padding(.leading)
-                                                .font(.title2)
-                                                .bold()
-                                                .onTapGesture {
-                                                    withAnimation(.spring()) {
-                                                        textInputIsFocused = true
-                                                        textInput = textInputed
-                                                        selectedLanguage = LanguageType.source
-                                                    }
-                                                }
-                                                .onSubmit {
-                                                    translationManager.textToTranslate = textInput
-                                                    if textInput != "" {
-                                                        translate()
-                                                        
-                                                        saveTranslation()
-                                                        
-                                                        
-                                                        withAnimation(.spring()) {
-                                                            translationHappened = true
-                                                            textInputIsFocused = false
-                                                            
-                                                        }
-                                                    }
-                                                    
-                                                    
-                                                }
-                                                .textInputAutocapitalization(.never)
-                                                .disableAutocorrection(true)
-                                            
-                                            Divider()
-                                                .padding()
-                                            
-                                            
-                                            if let languageName = translationManager.targetLanguage.name{
-                                                Text(languageName)
-                                                    .font(.caption2)
-                                                    .bold()
-                                                    .padding(.leading)
-                                                    .foregroundColor(.teal)
-                                            }
-                                            
-                                            
-                                            
-                                            
-                                            Text(textOutput)
-                                                .font(.title2)
-                                                .bold()
-                                                .padding(.leading)
-                                                .padding(.top, 2)
-                                                .foregroundColor(.teal)
-                                            Spacer()
-                                            
-                                        }
-                                    }
-                                    .padding()
-                                }
-                                .padding(.bottom, 8)
-                        }
-                        
-                        
-                        // new translation card
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(colorScheme == .dark ? .systemGray6 : .white))
                             .overlay {
                                 // translation texts
                                 VStack(alignment: .leading, spacing: 0) {
+                                    if translationHappened {
+                                       
+                                        if let languageName = translationManager.sourceLanguage.name{
+                                            Text(languageName)
+                                                .font(.caption2)
+                                                .bold()
+                                                .padding(.leading)
+                                                .padding(.top)
+                                        }
+                                        
+                                        
+                                    }
                                     
                                     if textInputIsFocused {
                                         HStack {
@@ -298,13 +116,15 @@ struct TranslationView: View {
                                                 .frame(width: 28, height: 28)
                                                 .symbolRenderingMode(.hierarchical)
                                                 .foregroundColor(.secondary)
+                                                .padding(.horizontal)
+                                                .padding(.top)
                                                 .onTapGesture {
                                                     withAnimation(.spring()) {
                                                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                                                         textInputIsFocused = false
-                                                        textInput = ""
                                                         speechRecognizer.stopTranscribing()
                                                         recording = false
+                                                        
                                                     }
                                                     
                                                 }
@@ -312,7 +132,7 @@ struct TranslationView: View {
                                     }
                                     
                                     TextField(recording ? "Listening..." : "Enter text", text: $textInput)
-                                        .foregroundColor(.black)
+                                        .padding()
                                         .padding(.leading)
                                         .font(.title2)
                                         .bold()
@@ -336,7 +156,6 @@ struct TranslationView: View {
                                                     
                                                 }
                                                 textInput = ""
-
                                             }
                                             
                                             
@@ -344,62 +163,302 @@ struct TranslationView: View {
                                         .textInputAutocapitalization(.never)
                                         .disableAutocorrection(true)
                                     
+                                    if translationHappened {
+                                        Divider()
+                                            .padding()
+            
+                                        if let languageName = translationManager.targetLanguage.name{
+                                            Text(languageName)
+                                                .font(.caption2)
+                                                .bold()
+                                                .padding(.leading)
+                                                .foregroundColor(.teal)
+                                        }
+                                        
+                                        
+                                        
+                                        Text(textOutput)
+                                            .font(.title2)
+                                            .bold()
+                                            .padding(.leading)
+                                            .padding(.top, 2)
+                                            .foregroundColor(.teal)
+                                    } else {
+                                        Spacer()
+                                        // microphone button and recording waves
+                                        VStack {
+                                            Spacer()
+                                            if recording {
+                                                WaveView()
+                                                    .padding(.bottom)
+                                            }
+                                            
+                                            HStack {
+                                                Spacer()
+                                                
+                                                Image(systemName: recording ? "mic.circle" : "mic.circle.fill")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 55)
+                                                    .foregroundColor(.teal)
+                                                    .padding()
+                                                    .onTapGesture {
+                                                        if !recording {
+                                                            speechRecognizer.resetTranscript()
+                                                            speechRecognizer.startTranscribing()
+                                                            withAnimation(.spring()) {
+                                                                recording = true
+                                                                textInputIsFocused = true
+                                                            }
+                                                            
+                                                        } else {
+                                                            speechRecognizer.stopTranscribing()
+                                                            recording = false
+                                                            textInput = speechRecognizer.transcript
+                                                            if textInput != "" {
+                                                                withAnimation(.spring()) {
+                                                                    translationManager.textToTranslate = textInput
+                                                                    translate()
+                                                                    
+                                                                    saveTranslation()
+                                                                    
+                                                                    
+                                                                    translationHappened = true
+                                                                    textInputed = textInput
+                                                                    textInput = ""
+                                                                    textInputIsFocused = false
+
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                
+                                                Spacer()
+                                            }
+                                            
+                                                
+                                        }
+
+                                    }
+
                                     Spacer()
                                     
                                 }
-                                .padding()
+                            }
+                            .padding(.horizontal)
+                            
+                            Spacer()
+                    } else {
+                        if !textInputIsFocused {
+                            // translated text card
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(Color(colorScheme == .dark ? .systemGray6 : .white))
+                                .overlay {
+                                    // translation texts
+                                    VStack(alignment: .leading, spacing: 0) {
+                                        
+                                        
+                                        if let languageName = translationManager.sourceLanguage.name{
+                                            Text(languageName)
+                                                .font(.caption2)
+                                                .bold()
+                                                .padding(.leading)
+                                                .padding(.top)
+                                        }
+                                        
+                                        
+                                        Text(textInputed)
+                                            .padding(.leading)
+                                            .font(.title2)
+                                            .bold()
+                                            .onTapGesture {
+                                                withAnimation(.spring()) {
+                                                    textInputIsFocused = true
+                                                    textInput = textInputed
+                                                    selectedLanguage = LanguageType.source
+                                                }
+                                            }
+                                            .onSubmit {
+                                                translationManager.textToTranslate = textInput
+                                                if textInput != "" {
+                                                    translate()
+                                                    
+                                                    saveTranslation()
+                                                    
+                                                    
+                                                    withAnimation(.spring()) {
+                                                        translationHappened = true
+                                                        textInputIsFocused = false
+                                                        
+                                                    }
+                                                }
+                                                
+                                                
+                                            }
+                                            .textInputAutocapitalization(.never)
+                                            .disableAutocorrection(true)
+                                        
+                                        Divider()
+                                            .padding()
+                                        
+                                        
+                                        if let languageName = translationManager.targetLanguage.name{
+                                            Text(languageName)
+                                                .font(.caption2)
+                                                .bold()
+                                                .padding(.leading)
+                                                .foregroundColor(.teal)
+                                        }
+                                        
+                                        
+                                        
+                                        
+                                        Text(textOutput)
+                                            .font(.title2)
+                                            .bold()
+                                            .padding(.leading)
+                                            .padding(.top, 2)
+                                            .foregroundColor(.teal)
+                                        Spacer()
+                                        
+                                    }
+                                    .padding()
+                                    
+                                }
+                                .padding(.bottom, 8)
+                                .padding(.horizontal)
+                        }
+                        
+                        
+                        // new translation card
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color(colorScheme == .dark ? .systemGray6 : .white))
+                            .overlay {
+                                // translation texts
+                                VStack(alignment: .leading, spacing: 0) {
+                                    
+                                    if textInputIsFocused {
+                                        HStack {
+                                            Spacer()
+                                            // X button
+                                            Image(systemName: "xmark.circle.fill")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 28, height: 28)
+                                                .symbolRenderingMode(.hierarchical)
+                                                .foregroundColor(.secondary)
+                                                .padding(.top)
+                                                .padding(.horizontal)
+                                                .onTapGesture {
+                                                    withAnimation(.spring()) {
+                                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                                        textInputIsFocused = false
+                                                        textInput = ""
+                                                        speechRecognizer.stopTranscribing()
+                                                        recording = false
+                                                    }
+                                                    
+                                                }
+                                        }
+                                    }
+                                    
+                                    TextField(recording ? "Listening..." : "Enter text", text: $textInput)
+                                        .padding(.leading)
+                                        .font(.title2)
+                                        .bold()
+                                        .padding()
+                                        .onTapGesture {
+                                            withAnimation(.spring()) {
+                                                textInputIsFocused = true
+                                                selectedLanguage = LanguageType.source
+                                            }
+                                        }
+                                        .onSubmit {
+                                            translationManager.textToTranslate = textInput
+                                            if textInput != "" {
+                                                textInputed = textInput
+                                                translate()
+                                                
+                                                saveTranslation()
+                                                
+                                                withAnimation(.spring()) {
+                                                    translationHappened = true
+                                                    textInputIsFocused = false
+                                                    
+                                                }
+                                                textInput = ""
+
+                                            }
+                                        }
+                                        .textInputAutocapitalization(.never)
+                                        .disableAutocorrection(true)
+                                    
+                                    Spacer()
+                                    
+                                    // microphone button and recording waves
+                                    VStack {
+                                        Spacer()
+                                        if recording {
+                                            WaveView()
+                                                .padding(.bottom)
+                                        }
+                                        
+                                        HStack {
+                                            Spacer()
+                                            
+                                            Image(systemName: recording ? "mic.circle" : "mic.circle.fill")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 55)
+                                                .foregroundColor(.teal)
+                                                .padding()
+                                                .onTapGesture {
+                                                    if !recording {
+                                                        speechRecognizer.resetTranscript()
+                                                        speechRecognizer.startTranscribing()
+                                                        withAnimation(.spring()) {
+                                                            recording = true
+                                                            textInputIsFocused = true
+                                                        }
+                                                        
+                                                    } else {
+                                                        speechRecognizer.stopTranscribing()
+                                                        recording = false
+                                                        textInput = speechRecognizer.transcript
+                                                        if textInput != "" {
+                                                            withAnimation(.spring()) {
+                                                                translationManager.textToTranslate = textInput
+                                                                translate()
+                                                                
+                                                                saveTranslation()
+                                                                
+                                                                
+                                                                translationHappened = true
+                                                                textInputed = textInput
+                                                                textInput = ""
+                                                                textInputIsFocused = false
+
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            
+                                            Spacer()
+                                        }
+                                        
+                                            
+                                    }
+                                    
+                                }
                                 
                             }
+                            .padding(.horizontal)
+                            .padding(.bottom, 4)
                     }
                 }
                 .padding(.top, 16)
                 
-                // microphone button and recording waves
-                VStack {
-                    Spacer()
-                    if recording {
-                        WaveView()
-                            .padding(.bottom)
-                    }
-                    
-                    Image(systemName: recording ? "mic.circle" : "mic.circle.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 55)
-                        .foregroundColor(.teal)
-                        .onTapGesture {
-                            if !recording {
-                                speechRecognizer.resetTranscript()
-                                speechRecognizer.startTranscribing()
-                                withAnimation(.spring()) {
-                                    recording = true
-                                    textInputIsFocused = true
-                                }
-                                
-                            } else {
-                                speechRecognizer.stopTranscribing()
-                                recording = false
-                                textInput = speechRecognizer.transcript
-                                if textInput != "" {
-                                    withAnimation(.spring()) {
-                                        translationManager.textToTranslate = textInput
-                                        translate()
-                                        
-                                        saveTranslation()
-                                        
-                                        
-                                        translationHappened = true
-                                        textInputed = textInput
-                                        textInput = ""
-                                        textInputIsFocused = false
-
-                                    }
-                                }
-                            }
-                        }
-                        
-                }
-                .padding(.bottom)
+                
             }
         }
         .task{
