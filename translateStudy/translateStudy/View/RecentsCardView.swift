@@ -71,7 +71,7 @@ struct RecentsCardView: View {
                  
             }.background {
                 RoundedRectangle(cornerRadius: 8)
-                    .foregroundColor(colorScheme == .dark ? Color(.systemGray6) : Color(.systemGray6))
+                    .foregroundColor(colorScheme == .dark ? Color(.systemGray6) : .white)
             }
     }
 }
