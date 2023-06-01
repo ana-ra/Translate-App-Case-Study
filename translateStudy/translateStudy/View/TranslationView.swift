@@ -226,6 +226,7 @@ struct TranslationView: View {
                                                 .onTapGesture {
                                                     withAnimation(.spring()) {
                                                         textInputIsFocused = true
+                                                        textInput = textInputed
                                                         selectedLanguage = LanguageType.source
                                                     }
                                                 }
@@ -335,6 +336,7 @@ struct TranslationView: View {
                                                     
                                                 }
                                                 textInput = ""
+
                                             }
                                             
                                             
@@ -390,6 +392,7 @@ struct TranslationView: View {
                                         textInputed = textInput
                                         textInput = ""
                                         textInputIsFocused = false
+
                                     }
                                 }
                             }
