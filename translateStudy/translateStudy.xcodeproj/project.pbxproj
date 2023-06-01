@@ -22,6 +22,7 @@
 		8925BE992A1CF19D00118B93 /* TranslationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8925BE982A1CF19D00118B93 /* TranslationManager.swift */; };
 		AE2FD2AC2A1E559C003E40B9 /* LanguagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2FD2AB2A1E559C003E40B9 /* LanguagePickerView.swift */; };
 		AE67665E2A24CE9800B7F93E /* RecentsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE67665D2A24CE9800B7F93E /* RecentsCardView.swift */; };
+		AED1FC2D2A28C101002E8C37 /* TranslationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED1FC2C2A28C101002E8C37 /* TranslationCardView.swift */; };
 		AEED9A422A2621BD0035DD87 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEED9A412A2621BD0035DD87 /* WaveAnimation.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		8925BE982A1CF19D00118B93 /* TranslationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationManager.swift; sourceTree = "<group>"; };
 		AE2FD2AB2A1E559C003E40B9 /* LanguagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePickerView.swift; sourceTree = "<group>"; };
 		AE67665D2A24CE9800B7F93E /* RecentsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsCardView.swift; sourceTree = "<group>"; };
+		AED1FC2C2A28C101002E8C37 /* TranslationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationCardView.swift; sourceTree = "<group>"; };
 		AEED9A412A2621BD0035DD87 /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +92,7 @@
 			children = (
 				AE67665D2A24CE9800B7F93E /* RecentsCardView.swift */,
 				3F820D172A1B9F20009A1E9E /* TranslationView.swift */,
+				AED1FC2C2A28C101002E8C37 /* TranslationCardView.swift */,
 				AE2FD2AB2A1E559C003E40B9 /* LanguagePickerView.swift */,
 				3B8ED06E2A276F4900FC3D1D /* DataModel.xcdatamodeld */,
 				3B8ED0712A27702400FC3D1D /* DataController.swift */,
@@ -200,6 +203,7 @@
 				8925BE992A1CF19D00118B93 /* TranslationManager.swift in Sources */,
 				8925BE972A1CF11C00118B93 /* TranslationAPI.swift in Sources */,
 				3F820D162A1B9F20009A1E9E /* translateStudyApp.swift in Sources */,
+				AED1FC2D2A28C101002E8C37 /* TranslationCardView.swift in Sources */,
 				AE2FD2AC2A1E559C003E40B9 /* LanguagePickerView.swift in Sources */,
 				3FEA4CDD2A1FA3B2001A9850 /* ConversationView.swift in Sources */,
 				3B8ED0722A27702400FC3D1D /* DataController.swift in Sources */,
