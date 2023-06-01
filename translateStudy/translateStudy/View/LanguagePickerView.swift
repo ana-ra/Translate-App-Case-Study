@@ -29,6 +29,9 @@ struct LanguagePickerView: View {
 //    @EnvironmentObject var speechRecognizer: SpeechRecognizer
 
     @Environment(\.colorScheme) var colorScheme
+    var pickerID: Int
+    @Binding var selectedLanguage: Int
+
     
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
@@ -39,12 +42,13 @@ struct LanguagePickerView: View {
                     // button with language name
                     Button {
                         withAnimation(.spring()) {
-                            selectedLanguage = languageType
+                            translationManager.swapLanguages()
+                            selectedLanguage = pickerID
                         }
                         
                     } label: {
                         HStack {
-                            if selectedLanguage == languageType {
+                            if selectedLanguage == pickerID {
                                 Image(systemName: "smallcircle.filled.circle.fill")
                                     .foregroundStyle(.teal, .teal.opacity(0.5))
                                     .font(.subheadline)
