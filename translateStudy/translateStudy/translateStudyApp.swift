@@ -17,7 +17,6 @@ struct translateStudyApp: App {
             TabBarView()
                 .environmentObject(translationManager)
                 .environment(\.managedObjectContext, dataController.container.viewContext)
-                .preferredColorScheme(.light)
         }
     }
 }
