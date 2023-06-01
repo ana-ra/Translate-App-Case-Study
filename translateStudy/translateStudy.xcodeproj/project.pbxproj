@@ -339,7 +339,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"translateStudy/Preview Content\"";
-				DEVELOPMENT_TEAM = 97247339Z3;
+				DEVELOPMENT_TEAM = G4C5799RK5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "ta gravando blz?";
@@ -370,7 +370,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"translateStudy/Preview Content\"";
-				DEVELOPMENT_TEAM = 97247339Z3;
+				DEVELOPMENT_TEAM = G4C5799RK5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "ta gravando blz?";

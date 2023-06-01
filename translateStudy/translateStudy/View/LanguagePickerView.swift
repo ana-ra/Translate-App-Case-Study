@@ -41,10 +41,10 @@ struct LanguagePickerView: View {
                 HStack {
                     // button with language name
                     Button {
-                        withAnimation(.spring()) {
+                        if selectedLanguage != -1 {
                             translationManager.swapLanguages()
-                            selectedLanguage = pickerID
                         }
+                        selectedLanguage = pickerID
                         
                     } label: {
                         HStack {
@@ -74,6 +74,7 @@ struct LanguagePickerView: View {
                             Spacer()
                         }
                     }
+                    .disabled(selectedLanguage == pickerID)
                     .padding(.trailing, 0)
                     
                     // divider
