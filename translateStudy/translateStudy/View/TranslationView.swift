@@ -20,7 +20,7 @@ struct TranslationView: View {
     @State var textInputed: String = ""
     @State var textOutput: String = ""
     @State private var textInputIsFocused: Bool = false
-
+    @FocusState var textInputFocus: Bool
     @State var translationHappened: Bool = false
     @State var selectedLanguage = -1
     
@@ -138,10 +138,10 @@ struct TranslationView: View {
                                         .bold()
                                         .onTapGesture {
                                             withAnimation(.spring()) {
+                                                textInputIsFocused = true
                                                 if selectedLanguage == -1 {
                                                     selectedLanguage = 0
                                                 }
-                                                textInputIsFocused = true
                                             }
                                         }
                                         .onSubmit {
@@ -155,7 +155,6 @@ struct TranslationView: View {
                                                 withAnimation(.spring()) {
                                                     translationHappened = true
                                                     textInputIsFocused = false
-                                                    
                                                 }
                                                 textInput = ""
                                             }
@@ -186,61 +185,66 @@ struct TranslationView: View {
                                             .padding(.top, 2)
                                             .foregroundColor(.teal)
                                     } else {
-                                        Spacer()
-                                        // microphone button and recording waves
-                                        VStack {
+                                        if !textInputIsFocused || recording{
                                             Spacer()
-                                            if recording {
-                                                WaveView()
-                                                    .padding(.bottom)
-                                            }
-                                            
-                                            HStack {
+                                            // microphone button and recording waves
+                                            VStack {
                                                 Spacer()
+                                                if recording {
+                                                    WaveView()
+                                                        .padding(.bottom)
+                                                }
                                                 
-                                                Image(systemName: recording ? "mic.circle" : "mic.circle.fill")
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .frame(width: 55)
-                                                    .foregroundColor(.teal)
-                                                    .padding()
-                                                    .onTapGesture {
-                                                        if !recording {
-                                                            speechRecognizer.resetTranscript()
-                                                            speechRecognizer.startTranscribing()
-                                                            withAnimation(.spring()) {
-                                                                recording = true
-                                                                textInputIsFocused = true
-                                                            }
-                                                            
-                                                        } else {
-                                                            speechRecognizer.stopTranscribing()
-                                                            recording = false
-                                                            textInput = speechRecognizer.transcript
-                                                            if textInput != "" {
+                                                HStack {
+                                                    Spacer()
+                                                    
+                                                    Image(systemName: recording ? "mic.circle" : "mic.circle.fill")
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .frame(width: 55)
+                                                        .foregroundColor(.teal)
+                                                        .padding()
+                                                        .onTapGesture {
+                                                            if !recording {
+                                                                speechRecognizer.resetTranscript()
+                                                                speechRecognizer.startTranscribing()
                                                                 withAnimation(.spring()) {
-                                                                    translationManager.textToTranslate = textInput
-                                                                    translate()
-                                                                    
-                                                                    saveTranslation()
-                                                                    
-                                                                    
-                                                                    translationHappened = true
-                                                                    textInputed = textInput
-                                                                    textInput = ""
-                                                                    textInputIsFocused = false
-
+                                                                    recording = true
+                                                                    textInputIsFocused = true
+                                                                    if selectedLanguage == -1 {
+                                                                        selectedLanguage = 0
+                                                                    }
+                                                                }
+                                                                
+                                                            } else {
+                                                                speechRecognizer.stopTranscribing()
+                                                                recording = false
+                                                                textInput = speechRecognizer.transcript
+                                                                if textInput != "" {
+                                                                    withAnimation(.spring()) {
+                                                                        translationManager.textToTranslate = textInput
+                                                                        translate()
+                                                                        
+                                                                        saveTranslation()
+                                                                        
+                                                                        
+                                                                        translationHappened = true
+                                                                        textInputed = textInput
+                                                                        textInput = ""
+                                                                        textInputIsFocused = false
+                                                                        
+                                                                    }
                                                                 }
                                                             }
                                                         }
-                                                    }
+                                                    
+                                                    Spacer()
+                                                }
                                                 
-                                                Spacer()
+                                                
                                             }
                                             
-                                                
                                         }
-
                                     }
 
                                     Spacer()
@@ -276,6 +280,7 @@ struct TranslationView: View {
                                             .onTapGesture {
                                                 withAnimation(.spring()) {
                                                     textInputIsFocused = true
+                                                    textInputFocus.toggle()
                                                     textInput = textInputed
 
                                                 }
@@ -365,16 +370,17 @@ struct TranslationView: View {
                                     }
                                     
                                     TextField(recording ? "Listening..." : "Enter text", text: $textInput)
+                                        .focused($textInputFocus)
                                         .padding(.leading)
                                         .font(.title2)
                                         .bold()
                                         .padding()
                                         .onTapGesture {
                                             withAnimation(.spring()) {
+                                                textInputIsFocused = true
                                                 if selectedLanguage == -1 {
                                                     selectedLanguage = 0
                                                 }
-                                                textInputIsFocused = true
                                             }
                                         }
                                         .onSubmit {
@@ -399,58 +405,60 @@ struct TranslationView: View {
                                     
                                     Spacer()
                                     
-                                    // microphone button and recording waves
-                                    VStack {
-                                        Spacer()
-                                        if recording {
-                                            WaveView()
-                                                .padding(.bottom)
-                                        }
-                                        
-                                        HStack {
+                                    if !textInputIsFocused || recording{
+                                        // microphone button and recording waves
+                                        VStack {
                                             Spacer()
+                                            if recording {
+                                                WaveView()
+                                                    .padding(.bottom)
+                                            }
                                             
-                                            Image(systemName: recording ? "mic.circle" : "mic.circle.fill")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: 55)
-                                                .foregroundColor(.teal)
-                                                .padding()
-                                                .onTapGesture {
-                                                    if !recording {
-                                                        speechRecognizer.resetTranscript()
-                                                        speechRecognizer.startTranscribing()
-                                                        withAnimation(.spring()) {
-                                                            recording = true
-                                                            textInputIsFocused = true
-                                                        }
-                                                        
-                                                    } else {
-                                                        speechRecognizer.stopTranscribing()
-                                                        recording = false
-                                                        textInput = speechRecognizer.transcript
-                                                        if textInput != "" {
+                                            HStack {
+                                                Spacer()
+                    
+                                                Image(systemName: recording ? "mic.circle" : "mic.circle.fill")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 55)
+                                                    .foregroundColor(.teal)
+                                                    .padding()
+                                                    .onTapGesture {
+                                                        if !recording {
+                                                            speechRecognizer.resetTranscript()
+                                                            speechRecognizer.startTranscribing()
                                                             withAnimation(.spring()) {
-                                                                translationManager.textToTranslate = textInput
-                                                                translate()
-                                                                
-                                                                saveTranslation()
-                                                                
-                                                                
-                                                                translationHappened = true
-                                                                textInputed = textInput
-                                                                textInput = ""
-                                                                textInputIsFocused = false
-
+                                                                recording = true
+                                                                textInputIsFocused = true
+                                                            }
+                                                            
+                                                        } else {
+                                                            speechRecognizer.stopTranscribing()
+                                                            recording = false
+                                                            textInput = speechRecognizer.transcript
+                                                            if textInput != "" {
+                                                                withAnimation(.spring()) {
+                                                                    translationManager.textToTranslate = textInput
+                                                                    translate()
+                                                                    
+                                                                    saveTranslation()
+                                                                    
+                                                                    
+                                                                    translationHappened = true
+                                                                    textInputed = textInput
+                                                                    textInput = ""
+                                                                    textInputIsFocused = false
+                                                                    
+                                                                }
                                                             }
                                                         }
                                                     }
-                                                }
+                                                
+                                                Spacer()
+                                            }
                                             
-                                            Spacer()
+                                            
                                         }
-                                        
-                                            
                                     }
                                     
                                 }
