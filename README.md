@@ -11,5 +11,6 @@ This repository is a case study that has the main goal of learning about program
 
 
 
-
-<img align="center" src="/exemple1.gif">
+<p align="center">
+   <img src="/exemple1.gif">
+</p>
