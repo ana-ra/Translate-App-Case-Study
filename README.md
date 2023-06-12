@@ -14,3 +14,5 @@ This repository is a case study that has the main goal of learning about program
 <p align="center">
    <img src="/exemple1.gif">
 </p>
+
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=UNDER%20DEVELOPMENT&color=GREEN&style=for-the-badge)
